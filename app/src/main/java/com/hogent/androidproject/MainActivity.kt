@@ -12,6 +12,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -23,6 +25,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val platformOptions = listOf("PC","Playstation","Xbox")
+            var (selectedOption, onOptionChange) = remember { mutableStateOf(platformOptions[0]) }
             AndroidprojectTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -30,6 +34,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     GreetingText()
+                    OptionsList(options = platformOptions , selectedOption = selectedOption, onOptionChange = onOptionChange)
                 }
             }
         }

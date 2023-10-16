@@ -12,14 +12,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-
+/**
+ * Reusable radio button list used for platform choice and category choice
+ */
 @Composable
 fun OptionsList(modifier: Modifier = Modifier,options: List<String>,selectedOption: String,onOptionChange: (String) -> Unit) {
-    Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally,modifier = modifier) {
+    Column(modifier = modifier) {
         options.forEach { text ->
-            Row(modifier = Modifier
-                .fillMaxWidth()
+            Row( verticalAlignment = Alignment.CenterVertically,modifier = Modifier
+                .fillMaxWidth().padding(horizontal = 20.dp)
                 .selectable(
                     selected = (text == selectedOption),
                     onClick = { onOptionChange(text) }
@@ -27,7 +30,7 @@ fun OptionsList(modifier: Modifier = Modifier,options: List<String>,selectedOpti
                 RadioButton(selected = (text == selectedOption), onClick = {
                     onOptionChange(text)
                 })
-                Text(text = text, modifier = Modifier.padding(8.dp))
+                Text(text = text)
             }
         }
     }

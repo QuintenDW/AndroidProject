@@ -53,16 +53,7 @@ class MainActivity : ComponentActivity() {
                             )
                         },
                         bottomBar = {
-                            BottomAppBar(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                contentColor = MaterialTheme.colorScheme.primary,
-                            ) {
-                                Text(
-                                    modifier = Modifier
-                                        ,
-                                    text = "Bottom app bar",
-                                )
-                            }
+                            BottomAppBarComponent()
                         },
                     ) { innerPadding ->
                         Column(

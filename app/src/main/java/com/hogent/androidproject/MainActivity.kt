@@ -72,6 +72,9 @@ class MainActivity : ComponentActivity() {
                                     onOptionChange = onOptionChange
                                 )
                             }
+                            composable(route = NavigationRoutes.About.name) {
+                                Text(text = "about page")
+                            }
                         }
 
                     }

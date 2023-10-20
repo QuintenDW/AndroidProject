@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
                             BottomAppBarComponent()
                         },
                     ) { innerPadding ->
-                       
+
                         Column(
                             modifier = Modifier
                                 .padding(innerPadding),

@@ -23,9 +23,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHost
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.hogent.androidproject.ui.NavigationRoutes
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
-import com.hogent.androidproject.ui.components.OptionsList
+import com.hogent.androidproject.ui.components.StartScreen
 import com.hogent.androidproject.ui.theme.AndroidprojectTheme
 
 class MainActivity : ComponentActivity() {
@@ -41,6 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val navController = rememberNavController()
                     Scaffold(
                         topBar = {
                             TopAppBar(
@@ -57,15 +61,19 @@ class MainActivity : ComponentActivity() {
                             BottomAppBarComponent()
                         },
                     ) { innerPadding ->
-
-                        Column(
-                            modifier = Modifier
-                                .padding(innerPadding),
-                            verticalArrangement = Arrangement.spacedBy(16.dp),
-                        ) {
-                            GreetingText()
-                            OptionsList(options = platformOptions , selectedOption = selectedOption, onOptionChange = onOptionChange)
+                        NavHost(navController = navController,
+                            startDestination = NavigationRoutes.Start.name,
+                            modifier = Modifier.padding(innerPadding),
+                            ) {
+                            composable(route = NavigationRoutes.Start.name) {
+                                StartScreen(
+                                    platformOptions = platformOptions,
+                                    selectedOption = selectedOption,
+                                    onOptionChange = onOptionChange
+                                )
+                            }
                         }
+
                     }
 
                 }

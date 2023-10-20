@@ -5,10 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -25,6 +23,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHost
+import com.hogent.androidproject.ui.components.BottomAppBarComponent
+import com.hogent.androidproject.ui.components.OptionsList
 import com.hogent.androidproject.ui.theme.AndroidprojectTheme
 
 class MainActivity : ComponentActivity() {
@@ -56,6 +57,7 @@ class MainActivity : ComponentActivity() {
                             BottomAppBarComponent()
                         },
                     ) { innerPadding ->
+                       
                         Column(
                             modifier = Modifier
                                 .padding(innerPadding),

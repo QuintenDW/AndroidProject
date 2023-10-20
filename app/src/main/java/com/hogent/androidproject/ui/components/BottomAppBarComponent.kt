@@ -1,4 +1,4 @@
-package com.hogent.androidproject
+package com.hogent.androidproject.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home

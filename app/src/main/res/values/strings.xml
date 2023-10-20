@@ -2,4 +2,5 @@
     <string name="app_name">Androidproject</string>
     <string name="welcome">Welkom bij de Free-To-Play games lijst.</string>
     <string name="platform_selection">Selecteer hieronder op welk platform je speelt</string>
+    <string name="volgende">Volgende</string>
 </resources>

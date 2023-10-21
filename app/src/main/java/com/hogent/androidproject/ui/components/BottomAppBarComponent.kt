@@ -9,21 +9,22 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.hogent.androidproject.ui.NavigationRoutes
 
 @Composable
-fun BottomAppBarComponent(modifier: Modifier = Modifier) {
+fun BottomAppBarComponent(modifier: Modifier = Modifier, goToStart: () -> Unit = {}, goToAbout: () -> Unit = {},currentScreen: NavigationRoutes) {
     NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceVariant,
         contentColor = MaterialTheme.colorScheme.primary,
         modifier = modifier) {
-        NavigationBarItem(selected = true,
-            onClick = { /*TODO*/ },
+        NavigationBarItem(selected = currentScreen == NavigationRoutes.Start,
+            onClick = goToStart,
             icon = { Icon(
                 imageVector = Icons.Outlined.Home,
                 contentDescription = "Ga naar home pagina")
             }
         )
-        NavigationBarItem(selected = false,
-            onClick = { /*TODO*/ },
+        NavigationBarItem(selected = currentScreen == NavigationRoutes.About,
+            onClick = goToAbout,
             icon = { Icon(
                 imageVector = Icons.Outlined.Info,
                 contentDescription = "Ga naar info pagina")

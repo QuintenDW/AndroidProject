@@ -60,7 +60,7 @@ fun CustomTopAppBar(modifier: Modifier = Modifier,navigateUp: () -> Unit = {},ca
         },
         modifier = modifier,
         navigationIcon = {
-            if (canNavigateBack) {
+            if (canNavigateBack && currentScreen != NavigationRoutes.Start) {
                 IconButton(onClick = navigateUp) {
                     Icon(
                         imageVector = Icons.Outlined.ArrowBack,
@@ -97,7 +97,10 @@ class MainActivity : ComponentActivity() {
                                 )
                         },
                         bottomBar = {
-                            BottomAppBarComponent()
+                            BottomAppBarComponent(
+                                currentScreen = currentScreen,
+                                goToStart = { navController.navigate(NavigationRoutes.Start.name)},
+                                goToAbout = { navController.navigate(NavigationRoutes.About.name)} )
                         },
                     ) { innerPadding ->
                         NavHost(navController = navController,

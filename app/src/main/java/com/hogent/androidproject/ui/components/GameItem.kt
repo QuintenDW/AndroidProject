@@ -14,6 +14,9 @@ import com.hogent.androidproject.R
 import com.hogent.androidproject.model.Game
 import com.hogent.androidproject.ui.theme.AndroidprojectTheme
 
+/**
+ * Show 1 game in the list
+ */
 @Composable
 fun GameItem(game: Game, modifier: Modifier = Modifier) {
     Row(modifier = modifier
@@ -23,6 +26,9 @@ fun GameItem(game: Game, modifier: Modifier = Modifier) {
     }
 }
 
+/**
+ * Info about the game
+ */
 @Composable
 fun GameInfo(title: String,  genre: String, platforms: String, modifier: Modifier = Modifier) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceBetween) {

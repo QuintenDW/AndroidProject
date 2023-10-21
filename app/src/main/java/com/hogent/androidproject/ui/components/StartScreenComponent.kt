@@ -10,7 +10,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.hogent.androidproject.GreetingText
 import com.hogent.androidproject.R
-
+/**
+ * Starting screen where the user can select which platform he/she plays on
+ */
 @Composable
 fun StartScreen(modifier: Modifier = Modifier, platformOptions: List<String>, selectedOption: String, onOptionChange: (String) -> Unit = {},
                 onButtonClicked: () -> Unit = {} ) {

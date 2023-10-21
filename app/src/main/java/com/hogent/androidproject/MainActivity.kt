@@ -28,6 +28,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.hogent.androidproject.ui.NavigationRoutes
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
+import com.hogent.androidproject.ui.components.CategoryScreen
 import com.hogent.androidproject.ui.components.StartScreen
 import com.hogent.androidproject.ui.theme.AndroidprojectTheme
 
@@ -37,7 +38,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val platformOptions = listOf("PC","Playstation","Xbox")
-            var (selectedOption, onOptionChange) = remember { mutableStateOf(platformOptions[0]) }
+            val categoryOptions = listOf("mmorpg", "shooter", "strategy", "moba", "racing", "sports")
+            var (selectedPlatform, onPlatformChange) = remember { mutableStateOf(platformOptions[0]) }
+            var (selectedCategory, onCategoryChange) = remember { mutableStateOf(categoryOptions[0]) }
             AndroidprojectTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -68,13 +71,17 @@ class MainActivity : ComponentActivity() {
                             composable(route = NavigationRoutes.Start.name) {
                                 StartScreen(
                                     platformOptions = platformOptions,
-                                    selectedOption = selectedOption,
-                                    onOptionChange = onOptionChange,
+                                    selectedOption = selectedPlatform,
+                                    onOptionChange = onPlatformChange,
                                     onButtonClicked = { navController.navigate(NavigationRoutes.Category.name) }
                                 )
                             }
                             composable(route = NavigationRoutes.Category.name) {
-                                Text(text = "placeholder")
+                                CategoryScreen(
+                                    categoryOptions = categoryOptions,
+                                    selectedOption = selectedCategory,
+                                    onOptionChange = onCategoryChange,
+                                )
                             }
                             composable(route = NavigationRoutes.About.name) {
                                 Text(text = "about page")

@@ -10,8 +10,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hogent.androidproject.GreetingText
 import com.hogent.androidproject.R
@@ -31,7 +31,7 @@ fun CategoryScreen(modifier: Modifier = Modifier,
         modifier = modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Column(modifier = Modifier.fillMaxWidth(),verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(modifier = Modifier.fillMaxWidth(),verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))) {
             GreetingText(headText = R.string.AppTitle,underText = R.string.category_selection)
             OptionsList(options = categoryOptions, selectedOption = selectedOption, onOptionChange = onOptionChange)
 
@@ -39,7 +39,7 @@ fun CategoryScreen(modifier: Modifier = Modifier,
 
         Row(modifier = Modifier
             .fillMaxWidth()
-            .padding(15.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            .padding(dimensionResource(R.dimen.padding_medium)), horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))) {
             Button(modifier = Modifier.weight(1f),onClick = onCancelClicked) {
                 Text(stringResource(R.string.annuleer),fontSize = 16.sp)
             }

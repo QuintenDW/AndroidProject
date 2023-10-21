@@ -11,6 +11,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,7 +27,9 @@ fun StartScreen(modifier: Modifier = Modifier, platformOptions: List<String>, se
         modifier = modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Column(modifier = Modifier.fillMaxWidth(),verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(modifier = Modifier.fillMaxWidth(),verticalArrangement = Arrangement.spacedBy(
+            dimensionResource(R.dimen.padding_medium)
+        )) {
             GreetingText(headText = R.string.welcome,underText = R.string.platform_selection)
             OptionsList(
                 options = platformOptions,
@@ -34,7 +37,7 @@ fun StartScreen(modifier: Modifier = Modifier, platformOptions: List<String>, se
                 onOptionChange = onOptionChange
             )
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(15.dp).weight(1f,false),horizontalArrangement = Arrangement.End) {
+        Row(modifier = Modifier.fillMaxWidth().padding(dimensionResource(R.dimen.padding_medium)).weight(1f,false),horizontalArrangement = Arrangement.End) {
             Button(modifier = Modifier.widthIn(min= 200.dp),onClick = onButtonClicked) {
                 Text(stringResource(R.string.volgende), fontSize = 16.sp)
             }

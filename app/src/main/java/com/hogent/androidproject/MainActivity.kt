@@ -69,8 +69,12 @@ class MainActivity : ComponentActivity() {
                                 StartScreen(
                                     platformOptions = platformOptions,
                                     selectedOption = selectedOption,
-                                    onOptionChange = onOptionChange
+                                    onOptionChange = onOptionChange,
+                                    onButtonClicked = { navController.navigate(NavigationRoutes.Category.name) }
                                 )
+                            }
+                            composable(route = NavigationRoutes.Category.name) {
+                                Text(text = "placeholder")
                             }
                             composable(route = NavigationRoutes.About.name) {
                                 Text(text = "about page")

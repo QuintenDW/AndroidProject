@@ -12,7 +12,8 @@ import com.hogent.androidproject.GreetingText
 import com.hogent.androidproject.R
 
 @Composable
-fun StartScreen(modifier: Modifier = Modifier, platformOptions: List<String>, selectedOption: String, onOptionChange: (String) -> Unit ) {
+fun StartScreen(modifier: Modifier = Modifier, platformOptions: List<String>, selectedOption: String, onOptionChange: (String) -> Unit = {},
+                onButtonClicked: () -> Unit = {} ) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -20,7 +21,7 @@ fun StartScreen(modifier: Modifier = Modifier, platformOptions: List<String>, se
         GreetingText()
         OptionsList(options = platformOptions , selectedOption = selectedOption, onOptionChange = onOptionChange)
 
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = onButtonClicked) {
             Text(stringResource(R.string.volgende))
         }
     }

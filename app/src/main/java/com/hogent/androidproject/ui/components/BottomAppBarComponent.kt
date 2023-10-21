@@ -3,25 +3,32 @@ package com.hogent.androidproject.ui.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
 fun BottomAppBarComponent(modifier: Modifier = Modifier) {
-    BottomAppBar(containerColor = MaterialTheme.colorScheme.surfaceVariant,
+    NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceVariant,
         contentColor = MaterialTheme.colorScheme.primary,
-        modifier = modifier,
+        modifier = modifier) {
+        NavigationBarItem(selected = true,
+            onClick = { /*TODO*/ },
+            icon = { Icon(
+                imageVector = Icons.Outlined.Home,
+                contentDescription = "Ga naar home pagina")
+            }
+        )
+        NavigationBarItem(selected = false,
+            onClick = { /*TODO*/ },
+            icon = { Icon(
+                imageVector = Icons.Outlined.Info,
+                contentDescription = "Ga naar info pagina")
+            }
+        )
+    }
 
-        actions = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Outlined.Home,contentDescription = "Go to home")
-            }
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Outlined.Info,contentDescription = "Go to about")
-            }
-        })
 }

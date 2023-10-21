@@ -46,6 +46,7 @@ fun GameItem(game: Game, modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.weight(1f))
             GameItemButton(expanded = expanded, onClick= { })
         }
+        ExtraGameInfo(description = game.description, publisher = game.publisher)
     }
 
 }
@@ -53,13 +54,18 @@ fun GameItem(game: Game, modifier: Modifier = Modifier) {
 @Composable
 private fun ExtraGameInfo(description: String,publisher: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
-        Row {
-            Text(text = stringResource(R.string.over))
-            Text(text = description)
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(text = stringResource(R.string.over), modifier = Modifier.padding(dimensionResource(
+            R.dimen.padding_medium)), fontWeight = FontWeight.Bold
+            )
+            Text(text = description, modifier = Modifier.padding(dimensionResource(
+                R.dimen.padding_medium)))
         }
-        Row {
-            Text(text = stringResource(R.string.uitgever))
-            Text(text = publisher)
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(text = stringResource(R.string.uitgever),modifier = Modifier.padding(
+                dimensionResource(R.dimen.padding_medium)), fontWeight = FontWeight.Bold)
+            Text(text = publisher, modifier = Modifier.padding(dimensionResource(
+                R.dimen.padding_medium)))
         }
 
     }

@@ -9,6 +9,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.hogent.androidproject.ui.NavigationRoutes
 
 @Composable
@@ -20,7 +21,7 @@ fun BottomAppBarComponent(modifier: Modifier = Modifier, goToStart: () -> Unit =
             onClick = goToStart,
             icon = { Icon(
                 imageVector = Icons.Outlined.Home,
-                tint = MaterialTheme.colorScheme.surface,
+                tint = if (currentScreen == NavigationRoutes.Start) Color.Black else Color.White,
                 contentDescription = "Ga naar home pagina")
             }
         )
@@ -28,7 +29,7 @@ fun BottomAppBarComponent(modifier: Modifier = Modifier, goToStart: () -> Unit =
             onClick = goToAbout,
             icon = { Icon(
                 imageVector = Icons.Outlined.Info,
-                tint = MaterialTheme.colorScheme.surface,
+                tint = if (currentScreen == NavigationRoutes.About) Color.Black else Color.White,
                 contentDescription = "Ga naar info pagina")
             }
         )

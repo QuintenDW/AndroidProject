@@ -3,9 +3,12 @@ package com.hogent.androidproject
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
@@ -25,6 +28,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -133,16 +138,19 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingText(modifier: Modifier = Modifier) {
+fun GreetingText(modifier: Modifier = Modifier,@StringRes headText: Int,@StringRes underText: Int) {
     Column(horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.spacedBy(5.dp), modifier = modifier.padding(12.dp)) {
         Text(
             fontSize= 24.sp,
-            text = stringResource(R.string.welcome),
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            text = stringResource(headText),
             modifier = modifier
         )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
             fontSize= 16.sp,
-            text = stringResource(R.string.platform_selection),
+            text = stringResource(underText),
             modifier = modifier
         )
     }
@@ -153,6 +161,6 @@ fun GreetingText(modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     AndroidprojectTheme {
-        GreetingText()
+        GreetingText(headText = R.string.welcome,underText = R.string.platform_selection)
     }
 }

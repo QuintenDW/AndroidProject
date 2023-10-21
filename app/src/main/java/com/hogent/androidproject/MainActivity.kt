@@ -81,11 +81,17 @@ class MainActivity : ComponentActivity() {
                                     categoryOptions = categoryOptions,
                                     selectedOption = selectedCategory,
                                     onOptionChange = onCategoryChange,
+                                    onButtonClicked = { navController.navigate(NavigationRoutes.List.name) },
+                                    onCancelClicked = { navController.popBackStack(NavigationRoutes.Start.name,inclusive = false)}
                                 )
+                            }
+                            composable(route = NavigationRoutes.List.name) {
+                                Text(text = "List page")
                             }
                             composable(route = NavigationRoutes.About.name) {
                                 Text(text = "about page")
                             }
+
                         }
 
                     }

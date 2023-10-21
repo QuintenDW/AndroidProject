@@ -44,9 +44,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.hogent.androidproject.data.DataSource
 import com.hogent.androidproject.ui.NavigationRoutes
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
 import com.hogent.androidproject.ui.components.CategoryScreen
+import com.hogent.androidproject.ui.components.GameList
 import com.hogent.androidproject.ui.components.StartScreen
 import com.hogent.androidproject.ui.theme.AndroidprojectTheme
 
@@ -133,7 +135,7 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                             composable(route = NavigationRoutes.List.name) {
-                                Text(text = "List page")
+                                GameList(gameList = DataSource().loadGames())
                             }
                             composable(route = NavigationRoutes.About.name) {
                                 Text(text = "about page")
@@ -172,7 +174,9 @@ fun exitScreen() : ExitTransition {
 }
 @Composable
 fun GreetingText(modifier: Modifier = Modifier,@StringRes headText: Int,@StringRes underText: Int) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.spacedBy(5.dp), modifier = modifier.padding(12.dp).fillMaxWidth()) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.spacedBy(5.dp), modifier = modifier
+        .padding(12.dp)
+        .fillMaxWidth()) {
         Text(
             fontSize= 24.sp,
             fontWeight = FontWeight.Bold,

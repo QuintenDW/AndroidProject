@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -139,7 +140,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GreetingText(modifier: Modifier = Modifier,@StringRes headText: Int,@StringRes underText: Int) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.spacedBy(5.dp), modifier = modifier.padding(12.dp)) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.spacedBy(5.dp), modifier = modifier.padding(12.dp).fillMaxWidth()) {
         Text(
             fontSize= 24.sp,
             fontWeight = FontWeight.Bold,

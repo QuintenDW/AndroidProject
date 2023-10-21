@@ -54,15 +54,15 @@ fun GameItem(game: Game, modifier: Modifier = Modifier) {
 @Composable
 private fun ExtraGameInfo(description: String,publisher: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+        Column(modifier = Modifier.fillMaxWidth()) {
             Text(text = stringResource(R.string.over), modifier = Modifier.padding(dimensionResource(
             R.dimen.padding_medium)), fontWeight = FontWeight.Bold
             )
             Text(text = description, modifier = Modifier.padding(dimensionResource(
                 R.dimen.padding_medium)))
         }
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Text(text = stringResource(R.string.uitgever),modifier = Modifier.padding(
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Text(text = stringResource(R.string.uitgevergame),modifier = Modifier.padding(
                 dimensionResource(R.dimen.padding_medium)), fontWeight = FontWeight.Bold)
             Text(text = publisher, modifier = Modifier.padding(dimensionResource(
                 R.dimen.padding_medium)))

@@ -1,5 +1,8 @@
 package com.hogent.androidproject.ui.components
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,7 +40,10 @@ import com.hogent.androidproject.ui.theme.AndroidprojectTheme
 @Composable
 fun GameItem(game: Game, modifier: Modifier = Modifier) {
     var expanded by remember { mutableStateOf(false) }
-    Card(modifier = modifier, colors = CardDefaults.cardColors(
+    Card(modifier = modifier.animateContentSize( animationSpec = spring(
+        dampingRatio = Spring.DampingRatioNoBouncy,
+        stiffness = Spring.StiffnessMediumLow))
+    , colors = CardDefaults.cardColors(
         containerColor = MaterialTheme.colorScheme.primaryContainer
     )) {
         Row(modifier = Modifier

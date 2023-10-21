@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -44,9 +45,12 @@ fun GameItem(game: Game, modifier: Modifier = Modifier) {
             .padding(dimensionResource(R.dimen.padding_medium))) {
             GameInfo(title = game.title, genre = game.genre, platforms = game.platforms)
             Spacer(modifier = Modifier.weight(1f))
-            GameItemButton(expanded = expanded, onClick= { })
+            GameItemButton(expanded = expanded, onClick= { expanded = !expanded })
         }
-        ExtraGameInfo(description = game.description, publisher = game.publisher)
+        if (expanded) {
+            ExtraGameInfo(description = game.description, publisher = game.publisher)
+        }
+
     }
 
 }
@@ -77,7 +81,7 @@ private fun ExtraGameInfo(description: String,publisher: String, modifier: Modif
 @Composable
 private fun GameItemButton(expanded: Boolean, onClick: () -> Unit = {},modifier: Modifier = Modifier) {
     IconButton(onClick = onClick, modifier = modifier) {
-        Icon(imageVector = Icons.Filled.ExpandMore, contentDescription = "Toont extra info")
+        Icon(imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore, contentDescription = "Toont extra info")
     }
 }
 /**

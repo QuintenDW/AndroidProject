@@ -13,13 +13,14 @@ import com.hogent.androidproject.ui.NavigationRoutes
 
 @Composable
 fun BottomAppBarComponent(modifier: Modifier = Modifier, goToStart: () -> Unit = {}, goToAbout: () -> Unit = {},currentScreen: NavigationRoutes) {
-    NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceVariant,
+    NavigationBar(containerColor = MaterialTheme.colorScheme.tertiary,
         contentColor = MaterialTheme.colorScheme.primary,
         modifier = modifier) {
         NavigationBarItem(selected = currentScreen == NavigationRoutes.Start,
             onClick = goToStart,
             icon = { Icon(
                 imageVector = Icons.Outlined.Home,
+                tint = MaterialTheme.colorScheme.surface,
                 contentDescription = "Ga naar home pagina")
             }
         )
@@ -27,6 +28,7 @@ fun BottomAppBarComponent(modifier: Modifier = Modifier, goToStart: () -> Unit =
             onClick = goToAbout,
             icon = { Icon(
                 imageVector = Icons.Outlined.Info,
+                tint = MaterialTheme.colorScheme.surface,
                 contentDescription = "Ga naar info pagina")
             }
         )

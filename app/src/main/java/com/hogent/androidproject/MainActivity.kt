@@ -7,7 +7,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -15,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.hogent.androidproject.ui.NavigationRoutes
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
@@ -32,6 +38,33 @@ import com.hogent.androidproject.ui.components.CategoryScreen
 import com.hogent.androidproject.ui.components.StartScreen
 import com.hogent.androidproject.ui.theme.AndroidprojectTheme
 
+/**
+ * Composable that show the top app bar
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CustomTopAppBar(modifier: Modifier = Modifier,navigateUp: () -> Unit = {},canNavigateBack: Boolean, currentScreen: NavigationRoutes) {
+    TopAppBar(
+        colors = TopAppBarDefaults.smallTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            titleContentColor = MaterialTheme.colorScheme.primary,
+        ),
+        title = {
+            Text(stringResource(currentScreen.title))
+        },
+        modifier = modifier,
+        navigationIcon = {
+            if (canNavigateBack) {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        imageVector = Icons.Outlined.ArrowBack,
+                        contentDescription = stringResource(R.string.terug_knop)
+                    )
+                }
+            }
+        }
+    )
+}
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,17 +81,14 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
+                    val backStackEntry by navController.currentBackStackEntryAsState()
+                    val currentScreen = NavigationRoutes.valueOf(backStackEntry?.destination?.route ?: NavigationRoutes.Start.name)
                     Scaffold(
                         topBar = {
-                            TopAppBar(
-                                colors = TopAppBarDefaults.smallTopAppBarColors(
-                                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                    titleContentColor = MaterialTheme.colorScheme.primary,
-                                ),
-                                title = {
-                                    Text("Top app bar")
-                                }
-                            )
+                            CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,
+                                currentScreen = currentScreen,
+                                navigateUp = { navController.navigateUp()}
+                                )
                         },
                         bottomBar = {
                             BottomAppBarComponent()

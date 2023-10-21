@@ -4,6 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -106,6 +112,8 @@ class MainActivity : ComponentActivity() {
                         NavHost(navController = navController,
                             startDestination = NavigationRoutes.Start.name,
                             modifier = Modifier.padding(innerPadding),
+                            enterTransition = { enterScreen() },
+                            exitTransition = { exitScreen() }
                             ) {
                             composable(route = NavigationRoutes.Start.name) {
                                 StartScreen(
@@ -141,6 +149,27 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/**
+ * Animatie voor binnenkomen scherm
+ */
+fun enterScreen() : EnterTransition {
+    return slideInHorizontally(
+        animationSpec = tween(
+            300, easing = LinearEasing
+        )
+    )
+}
+
+/**
+ * Animation for leaving screen
+ */
+fun exitScreen() : ExitTransition {
+    return slideOutHorizontally(
+        animationSpec = tween(
+            300, easing = LinearEasing
+        )
+    )
+}
 @Composable
 fun GreetingText(modifier: Modifier = Modifier,@StringRes headText: Int,@StringRes underText: Int) {
     Column(horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.spacedBy(5.dp), modifier = modifier.padding(12.dp).fillMaxWidth()) {

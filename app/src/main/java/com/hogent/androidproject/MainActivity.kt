@@ -72,8 +72,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             val platformOptions = listOf("PC","Playstation","Xbox")
             val categoryOptions = listOf("mmorpg", "shooter", "strategy", "moba", "racing", "sports")
-            var (selectedPlatform, onPlatformChange) = remember { mutableStateOf(platformOptions[0]) }
-            var (selectedCategory, onCategoryChange) = remember { mutableStateOf(categoryOptions[0]) }
+            val (selectedPlatform, onPlatformChange) = remember { mutableStateOf(platformOptions[0]) }
+            val (selectedCategory, onCategoryChange) = remember { mutableStateOf(categoryOptions[0]) }
             AndroidprojectTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(

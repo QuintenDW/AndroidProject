@@ -3,15 +3,25 @@ package com.hogent.androidproject.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +35,7 @@ import com.hogent.androidproject.ui.theme.AndroidprojectTheme
  */
 @Composable
 fun GameItem(game: Game, modifier: Modifier = Modifier) {
+    var expanded by remember { mutableStateOf(false) }
     Card(modifier = modifier, colors = CardDefaults.cardColors(
         containerColor = MaterialTheme.colorScheme.primaryContainer
     )) {
@@ -32,16 +43,42 @@ fun GameItem(game: Game, modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .padding(dimensionResource(R.dimen.padding_medium))) {
             GameInfo(title = game.title, genre = game.genre, platforms = game.platforms)
+            Spacer(modifier = Modifier.weight(1f))
+            GameItemButton(expanded = expanded, onClick= { })
         }
     }
 
 }
 
+@Composable
+private fun ExtraGameInfo(description: String,publisher: String, modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Row {
+            Text(text = stringResource(R.string.over))
+            Text(text = description)
+        }
+        Row {
+            Text(text = stringResource(R.string.uitgever))
+            Text(text = publisher)
+        }
+
+    }
+}
+
+/**
+ * To see extra information from a game
+ */
+@Composable
+private fun GameItemButton(expanded: Boolean, onClick: () -> Unit = {},modifier: Modifier = Modifier) {
+    IconButton(onClick = onClick, modifier = modifier) {
+        Icon(imageVector = Icons.Filled.ExpandMore, contentDescription = "Toont extra info")
+    }
+}
 /**
  * Info about the game
  */
 @Composable
-fun GameInfo(title: String,  genre: String, platforms: String, modifier: Modifier = Modifier) {
+private fun GameInfo(title: String,  genre: String, platforms: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(text = title, modifier = Modifier.padding(10.dp),
             textAlign = TextAlign.Center,

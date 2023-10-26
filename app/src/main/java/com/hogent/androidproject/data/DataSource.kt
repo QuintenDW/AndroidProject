@@ -8,7 +8,7 @@ class DataSource() {
             Game("Overwatch 2",
                 "A hero-focused first-person team shooter from Blizzard Entertainment.",
                 "Shooter",
-                "PC (Windows)",
+                "Playstation",
                 "Activision Blizzard"
                 ) ,
             Game("PUBG: BATTLEGROUNDS",

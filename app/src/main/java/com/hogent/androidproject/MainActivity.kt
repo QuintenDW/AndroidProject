@@ -46,7 +46,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.hogent.androidproject.data.DataSource
 import com.hogent.androidproject.ui.GameViewModel
 import com.hogent.androidproject.ui.NavigationRoutes
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
@@ -134,12 +133,15 @@ class MainActivity : ComponentActivity() {
                                 CategoryScreen(
                                     categoryOptions = categoryOptions,
                                     onOptionChange = { viewModel.setCategory(it) },
-                                    onButtonClicked = { navController.navigate(NavigationRoutes.List.name) },
+                                    onButtonClicked = {
+                                        viewModel.createGameList()
+                                        navController.navigate(NavigationRoutes.List.name)
+                                                      },
                                     onCancelClicked = { navController.popBackStack(NavigationRoutes.Start.name,inclusive = false)}
                                 )
                             }
                             composable(route = NavigationRoutes.List.name) {
-                                GameList(gameList = DataSource().loadGames())
+                                GameList(gameList = uiState.gameList)
                             }
                             composable(route = NavigationRoutes.About.name) {
                                 Text(text = "about page")

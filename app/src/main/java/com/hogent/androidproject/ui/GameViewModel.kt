@@ -1,7 +1,9 @@
 package com.hogent.androidproject.ui
 
 import androidx.lifecycle.ViewModel
+import com.hogent.androidproject.data.DataSource
 import com.hogent.androidproject.data.GameUiState
+import com.hogent.androidproject.model.Game
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -19,5 +21,18 @@ class GameViewModel : ViewModel() {
         _gameUiState.update {
             it.copy(category = category)
         }
+    }
+    fun createGameList() {
+        _gameUiState.update {
+            it.copy(
+                gameList = filterGames(it.platform,it.category)
+            )
+        }
+    }
+    private fun filterGames(platform: String,category: String): List<Game> {
+        return DataSource().loadGames().filter {
+            it.platforms.uppercase().contains(platform.uppercase()) && it.genre.uppercase().equals(category.uppercase())
+        }
+
     }
 }

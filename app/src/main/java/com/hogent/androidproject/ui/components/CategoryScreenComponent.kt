@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -22,18 +26,21 @@ import com.hogent.androidproject.R
 @Composable
 fun CategoryScreen(modifier: Modifier = Modifier,
                    categoryOptions: List<String>,
-                   selectedOption: String,
                    onOptionChange: (String) -> Unit = {},
                    onButtonClicked: () -> Unit = {},
                    onCancelClicked: () -> Unit = {}
                    ) {
+    var selectedOption by rememberSaveable { mutableStateOf("shooter") }
     Column(
         modifier = modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Column(modifier = Modifier.fillMaxWidth(),verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))) {
             GreetingText(headText = R.string.AppTitle,underText = R.string.category_selection)
-            OptionsList(options = categoryOptions, selectedOption = selectedOption, onOptionChange = onOptionChange)
+            OptionsList(options = categoryOptions, selectedOption = selectedOption, onOptionChange = {
+                selectedOption = it
+                onOptionChange(it)
+            })
 
         }
 

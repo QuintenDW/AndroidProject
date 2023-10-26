@@ -89,7 +89,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             val platformOptions = listOf("PC","Playstation","Xbox")
             val categoryOptions = listOf("mmorpg", "shooter", "strategy", "moba", "racing", "sports")
-            val (selectedPlatform, onPlatformChange) = remember { mutableStateOf(platformOptions[0]) }
             val (selectedCategory, onCategoryChange) = remember { mutableStateOf(categoryOptions[0]) }
             val viewModel: GameViewModel = viewModel()
             val uiState by viewModel.gameUiState.collectAsState()
@@ -125,16 +124,16 @@ class MainActivity : ComponentActivity() {
                             composable(route = NavigationRoutes.Start.name) {
                                 StartScreen(
                                     platformOptions = platformOptions,
-                                    selectedOption = selectedPlatform,
-                                    onOptionChange = onPlatformChange,
-                                    onButtonClicked = { navController.navigate(NavigationRoutes.Category.name) }
+                                    onOptionChange = {  viewModel.setPlatform(it) },
+                                    onButtonClicked = {
+
+                                        navController.navigate(NavigationRoutes.Category.name) }
                                 )
                             }
                             composable(route = NavigationRoutes.Category.name) {
                                 CategoryScreen(
                                     categoryOptions = categoryOptions,
-                                    selectedOption = selectedCategory,
-                                    onOptionChange = onCategoryChange,
+                                    onOptionChange = { viewModel.setCategory(it) },
                                     onButtonClicked = { navController.navigate(NavigationRoutes.List.name) },
                                     onCancelClicked = { navController.popBackStack(NavigationRoutes.Start.name,inclusive = false)}
                                 )

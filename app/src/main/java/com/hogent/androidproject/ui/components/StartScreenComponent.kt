@@ -10,6 +10,10 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -21,8 +25,11 @@ import com.hogent.androidproject.R
  * Starting screen where the user can select which platform he/she plays on
  */
 @Composable
-fun StartScreen(modifier: Modifier = Modifier, platformOptions: List<String>, selectedOption: String, onOptionChange: (String) -> Unit = {},
+fun StartScreen(modifier: Modifier = Modifier, platformOptions: List<String>, onOptionChange: (String) -> Unit = {},
                 onButtonClicked: () -> Unit = {} ) {
+
+    var selectedOption by rememberSaveable { mutableStateOf("PC")}
+
     Column(
         modifier = modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.SpaceBetween
@@ -34,10 +41,16 @@ fun StartScreen(modifier: Modifier = Modifier, platformOptions: List<String>, se
             OptionsList(
                 options = platformOptions,
                 selectedOption = selectedOption,
-                onOptionChange = onOptionChange
+                onOptionChange = {
+                    selectedOption = it
+                    onOptionChange(it)
+                }
             )
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(dimensionResource(R.dimen.padding_medium)).weight(1f,false),horizontalArrangement = Arrangement.End) {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(dimensionResource(R.dimen.padding_medium))
+            .weight(1f, false),horizontalArrangement = Arrangement.End) {
             Button(modifier = Modifier.widthIn(min= 200.dp),onClick = onButtonClicked) {
                 Text(stringResource(R.string.volgende), fontSize = 16.sp)
             }

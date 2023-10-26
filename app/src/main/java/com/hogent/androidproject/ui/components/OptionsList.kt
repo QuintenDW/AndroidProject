@@ -1,9 +1,10 @@
 package com.hogent.androidproject.ui.components
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -16,8 +17,8 @@ import androidx.compose.ui.unit.dp
  */
 @Composable
 fun OptionsList(modifier: Modifier = Modifier,options: List<String>,selectedOption: String,onOptionChange: (String) -> Unit) {
-    Column(modifier = modifier) {
-        options.forEach { text ->
+    LazyColumn(modifier = modifier) {
+        items(options) { text ->
             Row( verticalAlignment = Alignment.CenterVertically,modifier = Modifier
                 .fillMaxWidth().padding(horizontal = 20.dp)
                 .selectable(

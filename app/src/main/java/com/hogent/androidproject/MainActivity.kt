@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,11 +41,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.hogent.androidproject.data.DataSource
+import com.hogent.androidproject.ui.GameViewModel
 import com.hogent.androidproject.ui.NavigationRoutes
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
 import com.hogent.androidproject.ui.components.CategoryScreen
@@ -88,6 +91,8 @@ class MainActivity : ComponentActivity() {
             val categoryOptions = listOf("mmorpg", "shooter", "strategy", "moba", "racing", "sports")
             val (selectedPlatform, onPlatformChange) = remember { mutableStateOf(platformOptions[0]) }
             val (selectedCategory, onCategoryChange) = remember { mutableStateOf(categoryOptions[0]) }
+            val viewModel: GameViewModel = viewModel()
+            val uiState by viewModel.gameUiState.collectAsState()
             AndroidprojectTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(

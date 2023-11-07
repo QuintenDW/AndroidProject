@@ -10,7 +10,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.hogent.androidproject.ui.NavigationRoutes
+import com.hogent.androidproject.navigation.NavigationRoutes
 
 @Composable
 fun BottomAppBarComponent(modifier: Modifier = Modifier, goToStart: () -> Unit = {}, goToAbout: () -> Unit = {},currentScreen: NavigationRoutes) {

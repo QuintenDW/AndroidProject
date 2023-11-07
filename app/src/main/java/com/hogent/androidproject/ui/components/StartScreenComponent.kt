@@ -19,8 +19,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.hogent.androidproject.GreetingText
 import com.hogent.androidproject.R
+
 /**
  * Starting screen where the user can select which platform he/she plays on
  */

@@ -1,4 +1,4 @@
-package com.hogent.androidproject.ui
+package com.hogent.androidproject.navigation
 
 import androidx.annotation.StringRes
 import com.hogent.androidproject.R

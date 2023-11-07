@@ -22,7 +22,7 @@ fun GameList(
     LazyColumn(modifier = modifier) {
         items(gameList) {
             GameItem(game = it,modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))) {
-                favoriteViewModel.addGame(it)
+                favoriteViewModel.favoriteGame(it)
             }
         }
     }

@@ -12,9 +12,16 @@ class FavoriteViewModel : ViewModel() {
     private val _favoriteUIState = MutableStateFlow(FavoriteUIState())
     val favoriteUIState: StateFlow<FavoriteUIState> = _favoriteUIState.asStateFlow()
 
-    fun addGame(game: Game) {
+    fun favoriteGame(game: Game) {
         _favoriteUIState.update {
-            it.copy(favoriteGamesList = it.favoriteGamesList + game)
+            if (hasGame(game)) {
+                it.copy(favoriteGamesList = it.favoriteGamesList - game)
+            } else {
+                it.copy(favoriteGamesList = it.favoriteGamesList + game)
+            }
         }
+    }
+    fun hasGame(game: Game): Boolean {
+        return _favoriteUIState.value.favoriteGamesList.contains(game)
     }
 }

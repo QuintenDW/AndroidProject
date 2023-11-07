@@ -29,10 +29,10 @@ import com.hogent.androidproject.ui.components.StartScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GamesApp(viewModel: GameViewModel = viewModel(), navController: NavHostController = rememberNavController()) {
+fun GamesApp(gameViewModel: GameViewModel = viewModel(),favoriteViewModel: FavoriteViewModel = viewModel(), navController: NavHostController = rememberNavController()) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = NavigationRoutes.valueOf(backStackEntry?.destination?.route ?: NavigationRoutes.Start.name)
-    val uiState by viewModel.gameUiState.collectAsState()
+    val uiState by gameViewModel.gameUiState.collectAsState()
     val platformOptions = listOf("PC","Playstation","Xbox")
     val categoryOptions = listOf("mmorpg", "shooter", "strategy", "moba", "racing", "sports")
     Scaffold(
@@ -58,7 +58,7 @@ fun GamesApp(viewModel: GameViewModel = viewModel(), navController: NavHostContr
             composable(route = NavigationRoutes.Start.name) {
                 StartScreen(
                     platformOptions = platformOptions,
-                    onOptionChange = {  viewModel.setPlatform(it) },
+                    onOptionChange = {  gameViewModel.setPlatform(it) },
                     onButtonClicked = {
 
                         navController.navigate(NavigationRoutes.Category.name) }
@@ -67,16 +67,16 @@ fun GamesApp(viewModel: GameViewModel = viewModel(), navController: NavHostContr
             composable(route = NavigationRoutes.Category.name) {
                 CategoryScreen(
                     categoryOptions = categoryOptions,
-                    onOptionChange = { viewModel.setCategory(it) },
+                    onOptionChange = { gameViewModel.setCategory(it) },
                     onButtonClicked = {
-                        viewModel.createGameList()
+                        gameViewModel.createGameList()
                         navController.navigate(NavigationRoutes.List.name)
                     },
                     onCancelClicked = { navController.popBackStack(NavigationRoutes.Start.name,inclusive = false)}
                 )
             }
             composable(route = NavigationRoutes.List.name) {
-                GameList(gameList = uiState.gameList)
+                GameList(gameList = uiState.gameList, favoriteViewModel = favoriteViewModel)
             }
             composable(route = NavigationRoutes.About.name) {
                 Text(text = "about page")

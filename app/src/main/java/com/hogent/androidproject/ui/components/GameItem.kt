@@ -39,7 +39,7 @@ import com.hogent.androidproject.ui.theme.AndroidprojectTheme
  * Show 1 game in the list
  */
 @Composable
-fun GameItem(game: Game, modifier: Modifier = Modifier) {
+fun GameItem(game: Game, modifier: Modifier = Modifier, onFavorite: (Game) -> Unit = {}) {
     var expanded by rememberSaveable { mutableStateOf(false) }
     Card(modifier = modifier.animateContentSize( animationSpec = spring(
         dampingRatio = Spring.DampingRatioNoBouncy,
@@ -51,7 +51,7 @@ fun GameItem(game: Game, modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .padding(dimensionResource(R.dimen.padding_medium))) {
             FavoriteButton {
-
+                onFavorite(game)
             }
             GameInfo(title = game.title, genre = game.genre, platforms = game.platforms)
             Spacer(modifier = Modifier.weight(1f))

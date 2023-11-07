@@ -8,15 +8,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.hogent.androidproject.R
 import com.hogent.androidproject.model.Game
+import com.hogent.androidproject.ui.FavoriteViewModel
 
 /**
  * List of all free-to-play games
  */
 @Composable
-fun GameList(gameList: List<Game>, modifier: Modifier = Modifier) {
+fun GameList(
+    gameList: List<Game>,
+    favoriteViewModel: FavoriteViewModel,
+    modifier: Modifier = Modifier,
+) {
     LazyColumn(modifier = modifier) {
         items(gameList) {
-            GameItem(game = it,modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)))
+            GameItem(game = it,modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))) {
+                favoriteViewModel.addGame(it)
+            }
         }
     }
 }

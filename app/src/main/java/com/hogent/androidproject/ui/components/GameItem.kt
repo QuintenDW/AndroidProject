@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -49,6 +50,9 @@ fun GameItem(game: Game, modifier: Modifier = Modifier) {
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(R.dimen.padding_medium))) {
+            FavoriteButton {
+
+            }
             GameInfo(title = game.title, genre = game.genre, platforms = game.platforms)
             Spacer(modifier = Modifier.weight(1f))
             GameItemButton(expanded = expanded, onClick= { expanded = !expanded })
@@ -85,11 +89,19 @@ private fun ExtraGameInfo(description: String,publisher: String, modifier: Modif
  * To see extra information from a game
  */
 @Composable
-private fun GameItemButton(expanded: Boolean, onClick: () -> Unit = {},modifier: Modifier = Modifier) {
+private fun GameItemButton(expanded: Boolean, modifier: Modifier = Modifier,onClick: () -> Unit = {},) {
     IconButton(onClick = onClick, modifier = modifier) {
         Icon(imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore, contentDescription = "Toont extra info")
     }
 }
+
+@Composable
+private fun FavoriteButton( modifier: Modifier = Modifier, onClick: () -> Unit) {
+    IconButton(onClick = onClick,modifier = modifier) {
+        Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "Favoriet knop")
+    }
+}
+
 /**
  * Info about the game
  */

@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun GreetingText(modifier: Modifier = Modifier, @StringRes headText: Int, @StringRes underText: Int) {
+fun GreetingText( @StringRes headText: Int, @StringRes underText: Int,modifier: Modifier = Modifier) {
     Column(horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.spacedBy(5.dp), modifier = modifier
         .padding(12.dp)
         .fillMaxWidth()) {

@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
  * Reusable radio button list used for platform choice and category choice
  */
 @Composable
-fun OptionsList(modifier: Modifier = Modifier,options: List<String>,selectedOption: String,onOptionChange: (String) -> Unit) {
+fun OptionsList(options: List<String>,selectedOption: String,modifier: Modifier = Modifier,onOptionChange: (String) -> Unit) {
     LazyColumn(modifier = modifier) {
         items(options) { text ->
             Row( verticalAlignment = Alignment.CenterVertically,modifier = Modifier

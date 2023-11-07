@@ -25,7 +25,7 @@ import com.hogent.androidproject.R
  * Starting screen where the user can select which platform he/she plays on
  */
 @Composable
-fun StartScreen(modifier: Modifier = Modifier, platformOptions: List<String>, onOptionChange: (String) -> Unit = {},
+fun StartScreen( platformOptions: List<String>,modifier: Modifier = Modifier, onOptionChange: (String) -> Unit = {},
                 onButtonClicked: () -> Unit = {} ) {
 
     var selectedOption by rememberSaveable { mutableStateOf("PC")}

@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import com.hogent.androidproject.navigation.NavigationRoutes
 
 @Composable
-fun BottomAppBarComponent(modifier: Modifier = Modifier, goToStart: () -> Unit = {}, goToAbout: () -> Unit = {},currentScreen: NavigationRoutes) {
+fun BottomAppBarComponent(currentScreen: NavigationRoutes,modifier: Modifier = Modifier, goToStart: () -> Unit = {}, goToAbout: () -> Unit = {}) {
     NavigationBar(containerColor = MaterialTheme.colorScheme.tertiary,
         contentColor = MaterialTheme.colorScheme.primary,
         modifier = modifier) {

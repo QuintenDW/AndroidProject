@@ -24,8 +24,8 @@ import com.hogent.androidproject.R
  * After selecting the platform the user has to select which category of game he/she likes to play
  */
 @Composable
-fun CategoryScreen(modifier: Modifier = Modifier,
-                   categoryOptions: List<String>,
+fun CategoryScreen(categoryOptions: List<String>,
+                   modifier: Modifier = Modifier,
                    onOptionChange: (String) -> Unit = {},
                    onButtonClicked: () -> Unit = {},
                    onCancelClicked: () -> Unit = {}

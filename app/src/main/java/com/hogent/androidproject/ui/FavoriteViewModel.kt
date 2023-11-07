@@ -21,7 +21,7 @@ class FavoriteViewModel : ViewModel() {
             }
         }
     }
-    fun hasGame(game: Game): Boolean {
+    private fun hasGame(game: Game): Boolean {
         return _favoriteUIState.value.favoriteGamesList.contains(game)
     }
 }

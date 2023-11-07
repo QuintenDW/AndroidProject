@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -39,7 +40,13 @@ import com.hogent.androidproject.ui.theme.AndroidprojectTheme
  * Show 1 game in the list
  */
 @Composable
-fun GameItem(game: Game, modifier: Modifier = Modifier, onFavorite: (Game) -> Unit = {}) {
+fun GameItem(
+    game: Game,
+    modifier: Modifier = Modifier,
+    isAlreadyFavorite: (Game) -> Boolean = {false},
+    onFavorite: (Game) -> Unit = {},
+
+) {
     var expanded by rememberSaveable { mutableStateOf(false) }
     Card(modifier = modifier.animateContentSize( animationSpec = spring(
         dampingRatio = Spring.DampingRatioNoBouncy,
@@ -50,7 +57,7 @@ fun GameItem(game: Game, modifier: Modifier = Modifier, onFavorite: (Game) -> Un
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(R.dimen.padding_medium))) {
-            FavoriteButton {
+            FavoriteButton(isFavorite = isAlreadyFavorite(game)) {
                 onFavorite(game)
             }
             GameInfo(title = game.title, genre = game.genre, platforms = game.platforms)
@@ -96,9 +103,9 @@ private fun GameItemButton(expanded: Boolean, modifier: Modifier = Modifier,onCl
 }
 
 @Composable
-private fun FavoriteButton( modifier: Modifier = Modifier, onClick: () -> Unit) {
+private fun FavoriteButton(isFavorite: Boolean, modifier: Modifier = Modifier, onClick: () -> Unit) {
     IconButton(onClick = onClick,modifier = modifier) {
-        Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "Favoriet knop")
+        Icon(imageVector = if(isFavorite)  Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder, contentDescription = "Favoriet knop")
     }
 }
 
@@ -122,12 +129,14 @@ private fun GameInfo(title: String,  genre: String, platforms: String, modifier:
 @Composable
 private fun GameItemPreview() {
     AndroidprojectTheme {
-        GameItem( Game("Overwatch 2",
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-            "Shooter",
-            "PC (Windows)",
-            "Activision Blizzard"
-        ))
+        GameItem(
+            Game("Overwatch 2",
+                "A hero-focused first-person team shooter from Blizzard Entertainment.",
+                "Shooter",
+                "PC (Windows)",
+                "Activision Blizzard"
+            )
+        )
     }
 
 }

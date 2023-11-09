@@ -9,7 +9,6 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,6 +24,7 @@ import com.hogent.androidproject.navigation.NavigationRoutes
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
 import com.hogent.androidproject.ui.components.CategoryScreen
 import com.hogent.androidproject.ui.components.GameList
+import com.hogent.androidproject.ui.components.NoFavorites
 import com.hogent.androidproject.ui.components.StartScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,7 +32,8 @@ import com.hogent.androidproject.ui.components.StartScreen
 fun GamesApp(gameViewModel: GameViewModel = viewModel(),favoriteViewModel: FavoriteViewModel = viewModel(), navController: NavHostController = rememberNavController()) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = NavigationRoutes.valueOf(backStackEntry?.destination?.route ?: NavigationRoutes.Start.name)
-    val uiState by gameViewModel.gameUiState.collectAsState()
+    val gameUIState by gameViewModel.gameUiState.collectAsState()
+    val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
     val platformOptions = listOf("PC","Playstation","Xbox")
     val categoryOptions = listOf("mmorpg", "shooter", "strategy", "moba", "racing", "sports")
     Scaffold(
@@ -46,7 +47,7 @@ fun GamesApp(gameViewModel: GameViewModel = viewModel(),favoriteViewModel: Favor
             BottomAppBarComponent(
                 currentScreen = currentScreen,
                 goToStart = { navController.navigate(NavigationRoutes.Start.name)},
-                goToAbout = { navController.navigate(NavigationRoutes.About.name)} )
+                goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name)} )
         },
     ) { innerPadding ->
         NavHost(navController = navController,
@@ -76,10 +77,15 @@ fun GamesApp(gameViewModel: GameViewModel = viewModel(),favoriteViewModel: Favor
                 )
             }
             composable(route = NavigationRoutes.List.name) {
-                GameList(gameList = uiState.gameList, favoriteViewModel = favoriteViewModel)
+                GameList(gameList = gameUIState.gameList, favoriteViewModel = favoriteViewModel)
             }
-            composable(route = NavigationRoutes.About.name) {
-                Text(text = "about page")
+            composable(route = NavigationRoutes.Favorites.name) {
+                if (favoriteUIState.favoriteGamesList.isEmpty()) {
+                    NoFavorites()
+                } else {
+                    GameList(gameList = favoriteUIState.favoriteGamesList, favoriteViewModel = favoriteViewModel)
+                }
+
             }
 
         }

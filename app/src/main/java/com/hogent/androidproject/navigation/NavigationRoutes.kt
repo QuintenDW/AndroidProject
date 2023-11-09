@@ -7,5 +7,5 @@ enum class NavigationRoutes(@StringRes val title: Int) {
     Start(title = R.string.start),
     Category(title = R.string.categorie),
     List(title = R.string.overzicht),
-    About(title = R.string.over),
+    Favorites(title = R.string.favorieten),
 }

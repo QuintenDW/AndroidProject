@@ -7,9 +7,10 @@
     <string name="start">Start</string>
     <string name="categorie">Categorie</string>
     <string name="overzicht">Overzicht</string>
-    <string name="over">Over</string>
+    <string name="favorieten">Favorieten</string>
     <string name="terug_knop">terug knop</string>
     <string name="category_selection">Selecteer de game categorie</string>
     <string name="AppTitle">Free-To-Play games lijst</string>
     <string name="uitgevergame">Uitgever</string>
+    <string name="over">Over</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.hogent.androidproject.ui.components
+package com.hogent.androidproject.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,6 +18,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.hogent.androidproject.R
+import com.hogent.androidproject.ui.components.GreetingText
+import com.hogent.androidproject.ui.components.OptionsList
 
 
 /**

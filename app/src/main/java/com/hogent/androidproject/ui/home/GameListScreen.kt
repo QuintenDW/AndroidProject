@@ -1,11 +1,11 @@
-package com.hogent.androidproject.ui.components
+package com.hogent.androidproject.ui.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.hogent.androidproject.ui.components.GameList
 import com.hogent.androidproject.ui.favorites.FavoriteViewModel
-import com.hogent.androidproject.ui.home.GameViewModel
 
 @Composable
 fun GameListScreen(gameViewModel: GameViewModel,favoriteViewModel: FavoriteViewModel, modifier: Modifier = Modifier,) {

@@ -24,13 +24,13 @@ import com.hogent.androidproject.R
 import com.hogent.androidproject.navigation.CustomTopAppBar
 import com.hogent.androidproject.navigation.NavigationRoutes
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
-import com.hogent.androidproject.ui.components.CategoryScreen
-import com.hogent.androidproject.ui.components.FavoritesScreen
-import com.hogent.androidproject.ui.components.GameListScreen
 import com.hogent.androidproject.ui.components.NoFavorites
-import com.hogent.androidproject.ui.components.StartScreen
 import com.hogent.androidproject.ui.favorites.FavoriteViewModel
+import com.hogent.androidproject.ui.favorites.FavoritesScreen
+import com.hogent.androidproject.ui.home.CategoryScreen
+import com.hogent.androidproject.ui.home.GameListScreen
 import com.hogent.androidproject.ui.home.GameViewModel
+import com.hogent.androidproject.ui.home.StartScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

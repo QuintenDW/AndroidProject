@@ -1,4 +1,4 @@
-package com.hogent.androidproject.ui.components
+package com.hogent.androidproject.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,6 +20,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hogent.androidproject.R
+import com.hogent.androidproject.ui.components.GreetingText
+import com.hogent.androidproject.ui.components.OptionsList
 
 /**
  * Starting screen where the user can select which platform he/she plays on

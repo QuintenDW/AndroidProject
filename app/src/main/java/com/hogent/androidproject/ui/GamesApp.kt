@@ -29,7 +29,7 @@ import com.hogent.androidproject.ui.components.GameList
 import com.hogent.androidproject.ui.components.NoFavorites
 import com.hogent.androidproject.ui.components.StartScreen
 import com.hogent.androidproject.ui.favorites.FavoriteViewModel
-import com.hogent.androidproject.ui.main.GameViewModel
+import com.hogent.androidproject.ui.home.GameViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,7 +40,7 @@ fun GamesApp(gameViewModel: GameViewModel = viewModel(), favoriteViewModel: Favo
     val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
     val platformOptions = listOf(stringResource(R.string.pc), stringResource(R.string.browser),
         stringResource(R.string.all)
-    ) 
+    )
     val categoryOptions = listOf(stringResource(R.string.mmorpg),
         stringResource(R.string.shooter),
         stringResource(R.string.strategy), stringResource(R.string.moba),

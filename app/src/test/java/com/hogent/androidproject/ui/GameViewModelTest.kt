@@ -1,6 +1,6 @@
 package com.hogent.androidproject.ui
 
-import com.hogent.androidproject.ui.main.GameViewModel
+import com.hogent.androidproject.ui.home.GameViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test

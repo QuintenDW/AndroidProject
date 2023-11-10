@@ -1,4 +1,4 @@
-package com.hogent.androidproject.ui.main
+package com.hogent.androidproject.ui.home
 
 import com.hogent.androidproject.model.Game
 

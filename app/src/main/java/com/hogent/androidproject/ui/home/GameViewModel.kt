@@ -1,4 +1,4 @@
-package com.hogent.androidproject.ui.main
+package com.hogent.androidproject.ui.home
 
 import androidx.lifecycle.ViewModel
 import com.hogent.androidproject.data.DataSource

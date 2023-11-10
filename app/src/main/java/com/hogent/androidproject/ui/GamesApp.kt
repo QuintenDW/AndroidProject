@@ -13,12 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.hogent.androidproject.R
 import com.hogent.androidproject.navigation.CustomTopAppBar
 import com.hogent.androidproject.navigation.NavigationRoutes
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
@@ -36,8 +38,14 @@ fun GamesApp(gameViewModel: GameViewModel = viewModel(), favoriteViewModel: Favo
     val currentScreen = NavigationRoutes.valueOf(backStackEntry?.destination?.route ?: NavigationRoutes.Start.name)
     val gameUIState by gameViewModel.gameUiState.collectAsState()
     val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
-    val platformOptions = listOf("PC","Playstation","Xbox") //todo stringresources
-    val categoryOptions = listOf("mmorpg", "shooter", "strategy", "moba", "racing", "sports")
+    val platformOptions = listOf(stringResource(R.string.pc), stringResource(R.string.browser),
+        stringResource(R.string.all)
+    ) 
+    val categoryOptions = listOf(stringResource(R.string.mmorpg),
+        stringResource(R.string.shooter),
+        stringResource(R.string.strategy), stringResource(R.string.moba),
+        stringResource(R.string.racing), stringResource(R.string.sports)
+    )
     Scaffold(
         topBar = {
             CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,

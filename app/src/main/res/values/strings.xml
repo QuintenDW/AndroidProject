@@ -13,4 +13,13 @@
     <string name="AppTitle">Free-To-Play games lijst</string>
     <string name="uitgevergame">Uitgever</string>
     <string name="over">Over</string>
+    <string name="pc">PC</string>
+    <string name="browser">Browser</string>
+    <string name="all">All</string>
+    <string name="mmorpg">mmorpg</string>
+    <string name="shooter">shooter</string>
+    <string name="strategy">strategy</string>
+    <string name="moba">moba</string>
+    <string name="racing">racing</string>
+    <string name="sports">sports</string>
 </resources>

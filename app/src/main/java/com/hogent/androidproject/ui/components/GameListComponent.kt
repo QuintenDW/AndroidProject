@@ -10,14 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.hogent.androidproject.R
 import com.hogent.androidproject.model.Game
-import com.hogent.androidproject.ui.FavoriteViewModel
+import com.hogent.androidproject.ui.favorites.FavoriteViewModel
 
 /**
  * List of all free-to-play games
  */
 @Composable
 fun GameList(
-    gameList: List<Game>,
+    gameList: List<Game>,//todo viewmodel
     favoriteViewModel: FavoriteViewModel,
     modifier: Modifier = Modifier,
 ) {

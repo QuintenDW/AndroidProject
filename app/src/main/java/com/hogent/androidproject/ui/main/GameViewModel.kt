@@ -1,8 +1,7 @@
-package com.hogent.androidproject.ui
+package com.hogent.androidproject.ui.main
 
 import androidx.lifecycle.ViewModel
 import com.hogent.androidproject.data.DataSource
-import com.hogent.androidproject.data.GameUiState
 import com.hogent.androidproject.model.Game
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

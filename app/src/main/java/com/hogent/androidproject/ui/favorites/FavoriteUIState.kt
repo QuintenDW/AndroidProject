@@ -1,4 +1,4 @@
-package com.hogent.androidproject.data
+package com.hogent.androidproject.ui.favorites
 
 import com.hogent.androidproject.model.Game
 

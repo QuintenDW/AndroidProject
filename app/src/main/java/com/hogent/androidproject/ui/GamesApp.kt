@@ -26,15 +26,17 @@ import com.hogent.androidproject.ui.components.CategoryScreen
 import com.hogent.androidproject.ui.components.GameList
 import com.hogent.androidproject.ui.components.NoFavorites
 import com.hogent.androidproject.ui.components.StartScreen
+import com.hogent.androidproject.ui.favorites.FavoriteViewModel
+import com.hogent.androidproject.ui.main.GameViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GamesApp(gameViewModel: GameViewModel = viewModel(),favoriteViewModel: FavoriteViewModel = viewModel(), navController: NavHostController = rememberNavController()) {
+fun GamesApp(gameViewModel: GameViewModel = viewModel(), favoriteViewModel: FavoriteViewModel = viewModel(), navController: NavHostController = rememberNavController()) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = NavigationRoutes.valueOf(backStackEntry?.destination?.route ?: NavigationRoutes.Start.name)
     val gameUIState by gameViewModel.gameUiState.collectAsState()
     val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
-    val platformOptions = listOf("PC","Playstation","Xbox")
+    val platformOptions = listOf("PC","Playstation","Xbox") //todo stringresources
     val categoryOptions = listOf("mmorpg", "shooter", "strategy", "moba", "racing", "sports")
     Scaffold(
         topBar = {

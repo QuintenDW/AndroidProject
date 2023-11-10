@@ -1,7 +1,6 @@
-package com.hogent.androidproject.ui
+package com.hogent.androidproject.ui.favorites
 
 import androidx.lifecycle.ViewModel
-import com.hogent.androidproject.data.FavoriteUIState
 import com.hogent.androidproject.model.Game
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -17,7 +17,7 @@ import com.hogent.androidproject.ui.favorites.FavoriteViewModel
  */
 @Composable
 fun GameList(
-    gameList: List<Game>,//todo viewmodel
+    gameList: List<Game>,
     favoriteViewModel: FavoriteViewModel,
     modifier: Modifier = Modifier,
 ) {

@@ -25,7 +25,8 @@ import com.hogent.androidproject.navigation.CustomTopAppBar
 import com.hogent.androidproject.navigation.NavigationRoutes
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
 import com.hogent.androidproject.ui.components.CategoryScreen
-import com.hogent.androidproject.ui.components.GameList
+import com.hogent.androidproject.ui.components.FavoritesScreen
+import com.hogent.androidproject.ui.components.GameListScreen
 import com.hogent.androidproject.ui.components.NoFavorites
 import com.hogent.androidproject.ui.components.StartScreen
 import com.hogent.androidproject.ui.favorites.FavoriteViewModel
@@ -87,13 +88,13 @@ fun GamesApp(gameViewModel: GameViewModel = viewModel(), favoriteViewModel: Favo
                 )
             }
             composable(route = NavigationRoutes.List.name) {
-                GameList(gameList = gameUIState.gameList, favoriteViewModel = favoriteViewModel)
+                GameListScreen(gameViewModel = gameViewModel, favoriteViewModel = favoriteViewModel)
             }
             composable(route = NavigationRoutes.Favorites.name) {
                 if (favoriteUIState.favoriteGamesList.isEmpty()) {
                     NoFavorites()
                 } else {
-                    GameList(gameList = favoriteUIState.favoriteGamesList, favoriteViewModel = favoriteViewModel)
+                    FavoritesScreen(favoriteViewModel = favoriteViewModel)
                 }
 
             }

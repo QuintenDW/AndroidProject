@@ -1,5 +1,8 @@
 package com.hogent.androidproject.ui.home
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hogent.androidproject.data.DataSource
@@ -14,6 +17,13 @@ import java.io.IOException
 class GameViewModel : ViewModel() {
     private val _gameUiState = MutableStateFlow(GameUiState())
     val gameUiState = _gameUiState.asStateFlow()
+
+    var gameApiState: GameApiState by mutableStateOf(GameApiState.Loading)
+        private set
+
+    init {
+        getGames()
+    }
 
     fun setPlatform(platform: String) {
         _gameUiState.update {
@@ -37,8 +47,12 @@ class GameViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val gamesList = GameApi.retrofitService.getGames()
+                _gameUiState.update {
+                    it.copy(gameList = gamesList)
+                }
+                gameApiState = GameApiState.Success(gamesList)
             } catch(e: IOException) {
-
+                gameApiState = GameApiState.Error
             }
 
         }

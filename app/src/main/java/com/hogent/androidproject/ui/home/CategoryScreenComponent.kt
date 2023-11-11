@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,12 +27,15 @@ import com.hogent.androidproject.ui.components.OptionsList
  * After selecting the platform the user has to select which category of game he/she likes to play
  */
 @Composable
-fun CategoryScreen(categoryOptions: List<String>,
-                   modifier: Modifier = Modifier,
-                   onOptionChange: (String) -> Unit = {},
-                   onButtonClicked: () -> Unit = {},
-                   onCancelClicked: () -> Unit = {}
-                   ) {
+fun CategoryScreen(
+    categoryOptions: List<String>,
+    windowSize: WindowSizeClass,
+    modifier: Modifier = Modifier,
+    onOptionChange: (String) -> Unit = {},
+    onButtonClicked: () -> Unit = {},
+    onCancelClicked: () -> Unit = {},
+
+) {
     var selectedOption by rememberSaveable { mutableStateOf("shooter") }
     Column(
         modifier = modifier.fillMaxHeight(),
@@ -39,7 +43,7 @@ fun CategoryScreen(categoryOptions: List<String>,
     ) {
         Column(modifier = Modifier.fillMaxWidth(),verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))) {
             GreetingText(headText = R.string.AppTitle,underText = R.string.category_selection)
-            OptionsList(options = categoryOptions, selectedOption = selectedOption, onOptionChange = {
+            OptionsList(windowSize = windowSize,options = categoryOptions, selectedOption = selectedOption, onOptionChange = {
                 selectedOption = it
                 onOptionChange(it)
             })

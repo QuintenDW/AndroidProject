@@ -9,6 +9,7 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,7 +35,7 @@ import com.hogent.androidproject.ui.home.StartScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GamesApp(gameViewModel: GameViewModel = viewModel(), favoriteViewModel: FavoriteViewModel = viewModel(), navController: NavHostController = rememberNavController()) {
+fun GamesApp(windowSize: WindowSizeClass, gameViewModel: GameViewModel = viewModel(), favoriteViewModel: FavoriteViewModel = viewModel(), navController: NavHostController = rememberNavController()) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = NavigationRoutes.valueOf(backStackEntry?.destination?.route ?: NavigationRoutes.Start.name)
     val gameUIState by gameViewModel.gameUiState.collectAsState()
@@ -72,12 +73,14 @@ fun GamesApp(gameViewModel: GameViewModel = viewModel(), favoriteViewModel: Favo
                     platformOptions = platformOptions,
                     onOptionChange = {  gameViewModel.setPlatform(it) },
                     onButtonClicked = {
-
-                        navController.navigate(NavigationRoutes.Category.name) }
+                        navController.navigate(NavigationRoutes.Category.name)
+                    },
+                            windowSize = windowSize
                 )
             }
             composable(route = NavigationRoutes.Category.name) {
                 CategoryScreen(
+                    windowSize = windowSize,
                     categoryOptions = categoryOptions,
                     onOptionChange = { gameViewModel.setCategory(it) },
                     onButtonClicked = {

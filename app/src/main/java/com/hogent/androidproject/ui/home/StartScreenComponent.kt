@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,8 +28,14 @@ import com.hogent.androidproject.ui.components.OptionsList
  * Starting screen where the user can select which platform he/she plays on
  */
 @Composable
-fun StartScreen( platformOptions: List<String>,modifier: Modifier = Modifier, onOptionChange: (String) -> Unit = {},
-                onButtonClicked: () -> Unit = {} ) {
+fun StartScreen(
+    platformOptions: List<String>,
+    windowSize: WindowSizeClass,
+    modifier: Modifier = Modifier,
+    onOptionChange: (String) -> Unit = {},
+    onButtonClicked: () -> Unit = {},
+
+) {
 
     var selectedOption by rememberSaveable { mutableStateOf("PC")}
 
@@ -40,7 +47,7 @@ fun StartScreen( platformOptions: List<String>,modifier: Modifier = Modifier, on
             dimensionResource(R.dimen.padding_medium)
         )) {
             GreetingText(headText = R.string.welcome,underText = R.string.platform_selection)
-            OptionsList(
+            OptionsList(windowSize = windowSize,
                 options = platformOptions,
                 selectedOption = selectedOption,
                 onOptionChange = {

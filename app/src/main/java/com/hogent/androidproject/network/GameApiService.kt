@@ -15,3 +15,9 @@ interface GameApiService {
     @GET("games")
     fun getGames(): String
 }
+
+object GameApi {
+    val retrofitService: GameApiService by lazy {
+        retrofit.create(GameApiService::class.java)
+    }
+}

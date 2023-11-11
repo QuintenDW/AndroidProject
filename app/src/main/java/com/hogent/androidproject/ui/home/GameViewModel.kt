@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.hogent.androidproject.data.DataSource
 import com.hogent.androidproject.model.Game
 import com.hogent.androidproject.network.GameApi
+import com.hogent.androidproject.network.asDomainObjects
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -48,9 +49,9 @@ class GameViewModel : ViewModel() {
             try {
                 val gamesList = GameApi.retrofitService.getGames()
                 _gameUiState.update {
-                    it.copy(gameList = gamesList)
+                    it.copy(gameList = gamesList.asDomainObjects())
                 }
-                gameApiState = GameApiState.Success(gamesList)
+                gameApiState = GameApiState.Success(gamesList.asDomainObjects())
             } catch(e: IOException) {
                 gameApiState = GameApiState.Error
             }

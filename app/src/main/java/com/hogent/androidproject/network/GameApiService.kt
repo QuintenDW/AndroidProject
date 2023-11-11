@@ -13,7 +13,7 @@ private val retrofit = Retrofit.Builder()
 
 interface GameApiService {
     @GET("games")
-    fun getGames(): String
+    suspend fun getGames(): String
 }
 
 object GameApi {

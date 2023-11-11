@@ -45,7 +45,7 @@ class GameViewModel : ViewModel() {
     }
     private fun filterGames(platform: String,category: String): List<Game> {
         return DataSource().loadGames().filter {
-            it.platforms.uppercase().contains(platform.uppercase()) && it.genre.uppercase().equals(category.uppercase())
+            it.platform.uppercase().contains(platform.uppercase()) && it.genre.uppercase().equals(category.uppercase())
         }
     }
 }

@@ -60,7 +60,7 @@ fun GameItem(
             FavoriteButton(isFavorite = isAlreadyFavorite(game)) {
                 onFavorite(game)
             }
-            GameInfo(title = game.title, genre = game.genre, platforms = game.platforms)
+            GameInfo(title = game.title, genre = game.genre, platforms = game.platform)
             Spacer(modifier = Modifier.weight(1f))
             GameItemButton(expanded = expanded, onClick= { expanded = !expanded })
         }

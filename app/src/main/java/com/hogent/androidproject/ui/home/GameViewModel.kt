@@ -22,9 +22,6 @@ class GameViewModel : ViewModel() {
     var gameApiState: GameApiState by mutableStateOf(GameApiState.Loading)
         private set
 
-    init {
-        getGames()
-    }
 
     fun setPlatform(platform: String) {
         _gameUiState.update {
@@ -37,17 +34,16 @@ class GameViewModel : ViewModel() {
         }
     }
     fun createGameList() {
-        _gameUiState.update {
-            it.copy(
-                gameList = filterGames(it.platform,it.category)
-            )
-        }
+        getGames(_gameUiState.value.platform,_gameUiState.value.category)
     }
 
-    private fun getGames() {
+    /**
+     * Creates gamelist based on platform and category
+     */
+    private fun getGames(platform: String,category: String) {
         viewModelScope.launch {
             try {
-                val gamesList = GameApi.retrofitService.getGames()
+                val gamesList = GameApi.retrofitService.getGames(platform.lowercase(),category.lowercase())
                 _gameUiState.update {
                     it.copy(gameList = gamesList.asDomainObjects())
                 }

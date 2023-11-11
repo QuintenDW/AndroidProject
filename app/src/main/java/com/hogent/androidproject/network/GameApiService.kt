@@ -1,6 +1,5 @@
 package com.hogent.androidproject.network
 
-import com.hogent.androidproject.model.Game
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -16,7 +15,7 @@ private val retrofit = Retrofit.Builder()
 
 interface GameApiService {
     @GET("games")
-    suspend fun getGames(): List<Game>
+    suspend fun getGames(): List<ApiGame>
 }
 
 object GameApi {

@@ -10,3 +10,9 @@ data class GameUiState(
     val category: String = "shooter",
     val gameList: List<Game> = listOf()
 )
+
+sealed interface GameApiState {
+    data class Success(val gameList: List<Game>) : GameApiState
+    object Error : GameApiState
+    object Loading : GameApiState
+}

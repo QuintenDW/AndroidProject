@@ -1,8 +1,8 @@
 package com.hogent.androidproject.ui.components
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -28,7 +28,7 @@ fun BottomAppBarComponent(currentScreen: NavigationRoutes, modifier: Modifier = 
         NavigationBarItem(selected = currentScreen == NavigationRoutes.Favorites,
             onClick = goToFavorites,
             icon = { Icon(
-                imageVector = Icons.Outlined.Info,
+                imageVector = Icons.Outlined.FavoriteBorder,
                 tint = if (currentScreen == NavigationRoutes.Favorites) Color.Black else Color.White,
                 contentDescription = "Ga naar info pagina")
             }

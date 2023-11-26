@@ -8,11 +8,13 @@ import com.hogent.androidproject.model.Game
 data class GameUiState(
     val platform: String = "PC",
     val category: String = "shooter",
-    val gameList: List<Game> = listOf()
+
 )
 
+data class GameListState(val gameList: List<Game> = listOf())
+
 sealed interface GameApiState {
-    data class Success(val gameList: List<Game>) : GameApiState
+    object Success : GameApiState
     object Error : GameApiState
     object Loading : GameApiState
 }

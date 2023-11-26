@@ -12,7 +12,11 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.hogent.androidproject.GameApplication
 import com.hogent.androidproject.data.GameRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -20,6 +24,8 @@ import java.io.IOException
 class GameViewModel(private val gameRepository: GameRepository) : ViewModel() {
     private val _gameUiState = MutableStateFlow(GameUiState())
     val gameUiState = _gameUiState.asStateFlow()
+
+    lateinit var gameUIListState : StateFlow<GameListState>
 
     var gameApiState: GameApiState by mutableStateOf(GameApiState.Loading)
         private set
@@ -43,19 +49,19 @@ class GameViewModel(private val gameRepository: GameRepository) : ViewModel() {
      * Creates gamelist based on platform and category
      */
     private fun getGames(platform: String,category: String) {
-        viewModelScope.launch {
-            try {
-                val gamesList = gameRepository.getGames(platform.lowercase(),category.lowercase())
-                _gameUiState.update {
-                    it.copy(gameList = gamesList)
-                }
-                gameApiState = GameApiState.Success(gamesList)
-            } catch(e: IOException) {
-                gameApiState = GameApiState.Error
-            }
-
+        try {
+            viewModelScope.launch { gameRepository.refresh(platform.lowercase(),category.lowercase()) }
+            gameUIListState = gameRepository.getGames(platform.lowercase(),category.lowercase()).map { GameListState(it) }
+                .stateIn(
+                    scope = viewModelScope,
+                    started = SharingStarted.WhileSubscribed(5_000L),
+                    initialValue = GameListState()
+                )
+            gameApiState = GameApiState.Success
+        }  catch(e: IOException) {
+            gameApiState = GameApiState.Error
         }
-    }
+        }
 
     /**
      * Factory to use repository, tells how to handle the parameter of viewmodel

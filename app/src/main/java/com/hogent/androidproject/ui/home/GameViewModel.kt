@@ -4,9 +4,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
-import com.hogent.androidproject.data.DataSource
-import com.hogent.androidproject.model.Game
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.hogent.androidproject.network.GameApi
 import com.hogent.androidproject.network.asDomainObjects
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +17,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class GameViewModel : ViewModel() {
+class GameViewModel(private val gameRepository: GameRepository) : ViewModel() {
     private val _gameUiState = MutableStateFlow(GameUiState())
     val gameUiState = _gameUiState.asStateFlow()
 
@@ -43,20 +45,28 @@ class GameViewModel : ViewModel() {
     private fun getGames(platform: String,category: String) {
         viewModelScope.launch {
             try {
-                val gamesList = GameApi.retrofitService.getGames(platform.lowercase(),category.lowercase())
+                val gamesList = gameRepository.getGames(platform.lowercase(),category.lowercase())
                 _gameUiState.update {
-                    it.copy(gameList = gamesList.asDomainObjects())
+                    it.copy(gameList = gamesList)
                 }
-                gameApiState = GameApiState.Success(gamesList.asDomainObjects())
+                gameApiState = GameApiState.Success(gamesList)
             } catch(e: IOException) {
                 gameApiState = GameApiState.Error
             }
 
         }
     }
-    private fun filterGames(platform: String,category: String): List<Game> {
-        return DataSource().loadGames().filter {
-            it.platform.uppercase().contains(platform.uppercase()) && it.genre.uppercase().equals(category.uppercase())
+
+    /**
+     * Factory to use repository, tells how to handle the parameter of viewmodel
+     */
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val application = (this[APPLICATION_KEY] as GameApplication)
+                val gameRepository = application.container.gameRepository
+                GameViewModel(gameRepository = gameRepository)
+            }
         }
     }
 }

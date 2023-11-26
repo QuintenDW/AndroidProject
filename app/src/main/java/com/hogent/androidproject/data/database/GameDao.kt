@@ -20,6 +20,9 @@ interface GameDao {
     @Delete
     suspend fun delete(game: dbGame)
 
-    @Query("SELECT * from games ORDER BY title ASC")
-    fun getAllGames(): Flow<List<dbGame>>
+    @Query("SELECT * from games where lower(platform) like '%' || :platform || '%' and lower(genre) like :genre ORDER BY title ASC")
+    fun getAllGames(platform: String, genre: String): Flow<List<dbGame>>
+
+    @Query("DELETE from games")
+    suspend fun reset()
 }

@@ -20,12 +20,14 @@ interface GameRepository {
     suspend fun updateGame(game: Game)
 
     suspend fun refresh(platform: String, category: String)
+
+    suspend fun reset()
 }
 
 
 class CachingGameRepository(private val gameDao: GameDao,private val gameApiService: GameApiService): GameRepository {
     override fun getGames(platform: String, category: String): Flow<List<Game>> {
-        return gameDao.getAllGames().map {
+        return gameDao.getAllGames(platform,category).map {
             it.asDomainGames()
         }.onEach {
             if (it.isEmpty()) {
@@ -56,6 +58,10 @@ class CachingGameRepository(private val gameDao: GameDao,private val gameApiServ
                 insertGame(game);
             }
         }
+    }
+
+    override suspend fun reset() {
+        gameDao.reset()
     }
 
 }

@@ -24,5 +24,6 @@ fun Game.asDbGame(): dbGame {
 }
 
 fun List<dbGame>.asDomainGames(): List<Game>{
-    return this.map { it.asDomainGame() }
+    return this.map {
+        it.asDomainGame() }
 }

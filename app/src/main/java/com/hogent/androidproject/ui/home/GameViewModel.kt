@@ -50,7 +50,8 @@ class GameViewModel(private val gameRepository: GameRepository) : ViewModel() {
      */
     private fun getGames(platform: String,category: String) {
         try {
-            viewModelScope.launch { gameRepository.refresh(platform.lowercase(),category.lowercase()) }
+            viewModelScope.launch {
+                gameRepository.refresh(platform.lowercase(),category.lowercase()) }
             gameUIListState = gameRepository.getGames(platform.lowercase(),category.lowercase()).map { GameListState(it) }
                 .stateIn(
                     scope = viewModelScope,

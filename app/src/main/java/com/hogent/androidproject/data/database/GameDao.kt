@@ -21,5 +21,5 @@ interface GameDao {
     suspend fun delete(game: dbGame)
 
     @Query("SELECT * from games ORDER BY title ASC")
-    fun getAllItems(): Flow<List<dbGame>>
+    fun getAllGames(): Flow<List<dbGame>>
 }

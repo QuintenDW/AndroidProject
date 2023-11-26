@@ -22,3 +22,7 @@ fun dbGame.asDomainGame(): Game {
 fun Game.asDbGame(): dbGame {
     return dbGame(title = this.title, description = this.description, genre = this.genre, platform = this.platform, publisher = this.publisher)
 }
+
+fun List<dbGame>.asDomainGames(): List<Game>{
+    return this.map { it.asDomainGame() }
+}

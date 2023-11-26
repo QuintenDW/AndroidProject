@@ -1,5 +1,7 @@
 package com.hogent.androidproject.data
 
+import android.content.Context
+import com.hogent.androidproject.data.database.GameDb
 import com.hogent.androidproject.network.GameApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -13,7 +15,7 @@ interface AppContainer {
 /**
  * Container with all dependencies
  */
-class DefaultAppContainer(): AppContainer {
+class DefaultAppContainer(private val context: Context): AppContainer {
     private val BASE_URL =
         "https://www.freetogame.com/api/"
     private val retrofit = Retrofit.Builder()
@@ -25,6 +27,6 @@ class DefaultAppContainer(): AppContainer {
     }
 
     override val gameRepository: GameRepository by lazy {
-        ApiGameRepository(retrofitService)
+        CachingGameRepository(GameDb.getDatabase(context = context).gameDao(), retrofitService)
     }
 }

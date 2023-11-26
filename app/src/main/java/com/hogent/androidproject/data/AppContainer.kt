@@ -14,7 +14,7 @@ interface AppContainer {
  * Container with all dependencies
  */
 class DefaultAppContainer(): AppContainer {
-    private const val BASE_URL =
+    private val BASE_URL =
         "https://www.freetogame.com/api/"
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))

@@ -35,7 +35,7 @@ import com.hogent.androidproject.ui.home.StartScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GamesApp(windowSize: WindowSizeClass, gameViewModel: GameViewModel = viewModel(), favoriteViewModel: FavoriteViewModel = viewModel(), navController: NavHostController = rememberNavController()) {
+fun GamesApp(windowSize: WindowSizeClass, gameViewModel: GameViewModel = viewModel(factory = GameViewModel.Factory), favoriteViewModel: FavoriteViewModel = viewModel(), navController: NavHostController = rememberNavController()) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = NavigationRoutes.valueOf(backStackEntry?.destination?.route ?: NavigationRoutes.Start.name)
     val gameUIState by gameViewModel.gameUiState.collectAsState()

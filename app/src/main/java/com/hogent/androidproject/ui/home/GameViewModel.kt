@@ -10,8 +10,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.hogent.androidproject.GameApplication
-import com.hogent.androidproject.network.GameApi
-import com.hogent.androidproject.network.asDomainObjects
+import com.hogent.androidproject.data.GameRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

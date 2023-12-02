@@ -130,7 +130,7 @@ private fun GameInfo(title: String,  genre: String, platforms: String, modifier:
 private fun GameItemPreview() {
     AndroidprojectTheme {
         GameItem(
-            Game("Overwatch 2",
+            Game(1,"Overwatch 2",
                 "A hero-focused first-person team shooter from Blizzard Entertainment.",
                 "Shooter",
                 "PC (Windows)",

@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -33,7 +34,9 @@ fun GameList(
     modifier: Modifier = Modifier,
 ) {
     Column {
-        Box(modifier = Modifier.weight(1f)) {
+        Box(modifier = Modifier
+            .weight(1f)
+            .testTag(stringResource(id = R.string.game_lijst))) {
             LazyColumn(modifier = modifier) {
                 items(gameList) {
                     GameItem(game = it, modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
@@ -48,7 +51,7 @@ fun GameList(
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(R.dimen.padding_medium)),horizontalArrangement = Arrangement.End) {
-            Button(modifier = Modifier.widthIn(min= 200.dp),onClick = onButtonClicked) {
+            Button(modifier = Modifier.widthIn(min= 200.dp).testTag(stringResource(R.string.annuleer)),onClick = onButtonClicked) {
                 Text(stringResource(R.string.annuleer), fontSize = 16.sp)
             }
         }

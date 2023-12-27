@@ -23,7 +23,6 @@ interface GameRepository {
 
     suspend fun refresh(platform: String, category: String)
 
-    suspend fun reset()
 }
 
 
@@ -69,8 +68,5 @@ class CachingGameRepository(private val gameDao: GameDao,private val gameApiServ
         }
     }
 
-    override suspend fun reset() {
-        gameDao.reset()
-    }
 
 }

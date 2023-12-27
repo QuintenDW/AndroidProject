@@ -12,8 +12,10 @@ import androidx.compose.material3.NavigationRailItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
+import com.hogent.androidproject.R
 
 @Composable
 fun GamesNavigationRail(currentScreen: NavDestination?,
@@ -28,7 +30,7 @@ fun GamesNavigationRail(currentScreen: NavDestination?,
             icon = { Icon(
                 imageVector = Icons.Outlined.Home,
                 tint = if (currentScreen?.route == NavigationRoutes.Start.name) Color.Black else Color.White,
-                contentDescription = "Ga naar home pagina")
+                contentDescription = stringResource(id = R.string.home_pagina))
             }
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -37,7 +39,8 @@ fun GamesNavigationRail(currentScreen: NavDestination?,
             icon = { Icon(
                 imageVector = Icons.Outlined.FavoriteBorder,
                 tint = if (currentScreen?.route == NavigationRoutes.Favorites.name) Color.Black else Color.White,
-                contentDescription = "Ga naar favorieten pagina")
+                contentDescription = stringResource(id = R.string.favorieten_pagina)
+            )
             }
         )
     }

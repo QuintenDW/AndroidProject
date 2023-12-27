@@ -4,6 +4,8 @@
     <string name="platform_selection">Selecteer hieronder op welk platform je speelt</string>
     <string name="volgende">Volgende</string>
     <string name="annuleer">Ga terug</string>
+    <string name="favorieten_pagina">Ga naar favorieten pagina</string>
+    <string name="home_pagina">Ga naar home pagina</string>
     <string name="start">Games lijst</string>
     <string name="favorieten">Favorieten</string>
     <string name="terug_knop">terug knop</string>
@@ -19,4 +21,7 @@
     <string name="moba">moba</string>
     <string name="racing">racing</string>
     <string name="sports">sports</string>
+    <string name="game_lijst">game List</string>
+    <string name="favoriete_knop">Favoriete knop</string>
+    <string name="geen_favorieten">"Je hebt geen favorieten"</string>
 </resources>

@@ -52,7 +52,9 @@ fun GamesScreen(windowSize: NavigationType,
         }
 
         WizardSteps.LIST -> {
-            GameListScreen(gameViewModel = gameViewModel, favoriteViewModel = favoriteViewModel)
+            GameListScreen(gameViewModel = gameViewModel,
+                favoriteViewModel = favoriteViewModel,
+                onButtonClicked = { gameViewModel.back()})
         }
     }
 }

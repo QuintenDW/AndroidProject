@@ -54,7 +54,10 @@ fun GamesScreen(windowSize: NavigationType,
         }
 
         WizardSteps.LIST -> {
-            GameListScreen(gameViewModel = gameViewModel,
+            val listState by gameViewModel.gameUIListState.collectAsState()
+            val gameApiState = gameViewModel.gameApiState
+            GameListScreen(apiState = gameApiState,
+                gameList = listState.gameList,
                 onButtonClicked = { gameViewModel.back()},
                 addToFavorites = addToFavorites,
                 isFavorite = isFavorite)

@@ -7,8 +7,6 @@ De gebruiker kan dan in zijn favorieten lijst bekijken welke games hij/zij als f
 
 #### TODO:
 
-- Responsiveness voor landscape mode
-- Connectie met API
 - Persistence voor favorieten bij te houden
 - Filter bij de lijst
 - Extra animaties toevoegen

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hogent.androidproject.R
+import com.hogent.androidproject.navigation.NavigationType
 import com.hogent.androidproject.ui.components.GreetingText
 import com.hogent.androidproject.ui.components.OptionsList
 
@@ -30,7 +30,7 @@ import com.hogent.androidproject.ui.components.OptionsList
 @Composable
 fun StartScreen(
     platformOptions: List<String>,
-    windowSize: WindowSizeClass,
+    windowSize: NavigationType,
     modifier: Modifier = Modifier,
     onOptionChange: (String) -> Unit = {},
     onButtonClicked: () -> Unit = {},

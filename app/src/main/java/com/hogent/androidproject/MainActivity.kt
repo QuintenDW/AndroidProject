@@ -8,10 +8,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.hogent.androidproject.navigation.NavigationType
 import com.hogent.androidproject.ui.GamesApp
 import com.hogent.androidproject.ui.components.GreetingText
 import com.hogent.androidproject.ui.theme.AndroidprojectTheme
@@ -28,7 +30,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GamesApp(windowSize = windowSizeClass)
+                    when (windowSizeClass.widthSizeClass) {
+                        WindowWidthSizeClass.Compact -> {
+                            GamesApp(windowSize = NavigationType.COMPACT_NAVIGATION)
+                        }
+                        WindowWidthSizeClass.Medium -> {
+                            GamesApp(windowSize = NavigationType.NAVIGATION_RAIL)
+                        }
+                        WindowWidthSizeClass.Expanded -> {
+                            GamesApp(windowSize = NavigationType.PERMANENT_NAVIGATION_DRAWER)
+                        }
+                        else -> {
+                            GamesApp(windowSize = NavigationType.COMPACT_NAVIGATION)
+                        }
+                    }
+                    
                 }
             }
         }

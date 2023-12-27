@@ -9,19 +9,19 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.hogent.androidproject.navigation.NavigationType
+
 /**
  * Reusable radio button list used for platform choice and category choice
  */
 @Composable
-fun OptionsList(windowSize: WindowSizeClass, options: List<String>, selectedOption: String, modifier: Modifier = Modifier, onOptionChange: (String) -> Unit) {
-    when (windowSize.widthSizeClass) {
-        WindowWidthSizeClass.Compact ->
+fun OptionsList(windowSize: NavigationType, options: List<String>, selectedOption: String, modifier: Modifier = Modifier, onOptionChange: (String) -> Unit) {
+    when (windowSize) {
+        NavigationType.COMPACT_NAVIGATION ->
             LazyColumn(modifier = modifier) {
             items(options) { text ->
                 Row( verticalAlignment = Alignment.CenterVertically,modifier = Modifier
@@ -37,7 +37,7 @@ fun OptionsList(windowSize: WindowSizeClass, options: List<String>, selectedOpti
                 }
             }
         }
-        WindowWidthSizeClass.Expanded ->
+        else ->
             LazyRow(modifier = modifier) {
                 items(options) { text ->
                     Row( verticalAlignment = Alignment.CenterVertically,modifier = Modifier

@@ -12,8 +12,7 @@ import com.hogent.androidproject.navigation.NavigationType
 
 @Composable
 fun GamesScreen(windowSize: NavigationType,
-                gameViewModel: GameViewModel = viewModel(factory = GameViewModel.Factory)
-                ,
+                gameViewModel: GameViewModel = viewModel(factory = GameViewModel.Factory),
                 addToFavorites: (Game) -> Unit,
                 isFavorite: (Game) -> Boolean) {
     BackHandler(

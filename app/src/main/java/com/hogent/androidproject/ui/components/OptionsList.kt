@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.hogent.androidproject.navigation.NavigationType
 
@@ -27,7 +28,7 @@ fun OptionsList(windowSize: NavigationType, options: List<String>,
             LazyColumn(modifier = modifier) {
             items(options) { text ->
                 Row( verticalAlignment = Alignment.CenterVertically,modifier = Modifier
-                    .fillMaxWidth().padding(horizontal = 20.dp)
+                    .fillMaxWidth().padding(horizontal = 20.dp).testTag(text)
                     .selectable(
                         selected = (text == selectedOption),
                         onClick = { onOptionChange(text) }

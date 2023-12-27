@@ -35,37 +35,7 @@ class NavigationTest {
             navController.currentBackStackEntry?.destination?.route
         )
     }
-/*
-    @Test
-    fun clickOnVolgendeGivesCategoryPage() {
-        val text = composeTestRule.activity.getString(R.string.volgende)
-        composeTestRule.onNodeWithText(text).performClick()
-        Assert.assertEquals(
-            NavigationRoutes.Category.name,
-            navController.currentBackStackEntry?.destination?.route
-        )
-    }
-    @Test
-    fun selectingPlatformAndCategoryGivesOverviewGames() {
-        Assert.assertEquals(
-            NavigationRoutes.Start.name,
-            navController.currentBackStackEntry?.destination?.route
-        )
-        val text = composeTestRule.activity.getString(R.string.volgende)
-        //Go to ctageory
-        composeTestRule.onNodeWithText(text).performClick()
-        Assert.assertEquals(
-            NavigationRoutes.Category.name,
-            navController.currentBackStackEntry?.destination?.route
-        )
-        //go to overview games
-        composeTestRule.onNodeWithText(text).performClick()
-        Assert.assertEquals(
-            NavigationRoutes.List.name,
-            navController.currentBackStackEntry?.destination?.route
-        )
-    }
-    */
+
     @Test
     fun clickOnFavoritesGoToFavoritesList() {
     val text = composeTestRule.activity.getString(R.string.favorieten_pagina)

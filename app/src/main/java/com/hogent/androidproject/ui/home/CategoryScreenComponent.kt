@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
@@ -38,7 +39,9 @@ fun CategoryScreen(
 ) {
     var selectedOption by rememberSaveable { mutableStateOf("shooter") }
     Column(
-        modifier = modifier.fillMaxHeight(),
+        modifier = modifier
+            .fillMaxHeight()
+            .testTag(""),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Column(modifier = Modifier.fillMaxWidth(),verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))) {
@@ -53,10 +56,14 @@ fun CategoryScreen(
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(R.dimen.padding_medium)), horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))) {
-            Button(modifier = Modifier.weight(1f),onClick = onCancelClicked) {
+            Button(modifier = Modifier
+                .weight(1f)
+                .testTag(stringResource(R.string.annuleer)),onClick = onCancelClicked) {
                 Text(stringResource(R.string.annuleer),fontSize = 16.sp)
             }
-            Button(modifier = Modifier.weight(1f),onClick = onButtonClicked) {
+            Button(modifier = Modifier
+                .weight(1f)
+                .testTag(stringResource(R.string.volgende)),onClick = onButtonClicked) {
                 Text(stringResource(R.string.volgende),fontSize = 16.sp)
             }
         }

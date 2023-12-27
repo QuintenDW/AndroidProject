@@ -1,5 +1,6 @@
 package com.hogent.androidproject.ui
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -8,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.hogent.androidproject.navigation.CustomTopAppBar
+import com.hogent.androidproject.navigation.GamesNavigationRail
 import com.hogent.androidproject.navigation.NavComponent
 import com.hogent.androidproject.navigation.NavigationRoutes
 import com.hogent.androidproject.navigation.NavigationType
@@ -35,6 +37,21 @@ fun GamesApp(windowSize: NavigationType,  navController: NavHostController = rem
             },
         ) { innerPadding ->
             NavComponent(windowSize = windowSize,innerPadding = innerPadding,navController = navController)
+        }
+    } else if (windowSize == NavigationType.NAVIGATION_RAIL) {
+        Row {
+            GamesNavigationRail(currentScreen = backStackEntry?.destination, goToStart = { navController.navigate(NavigationRoutes.Start.name) },
+                goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) })
+            Scaffold(
+                topBar = {
+                    CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,
+                        currentScreen = currentScreen,
+                        navigateUp = { navController.navigateUp() }
+                    )
+                }
+            ) { innerPadding ->
+                NavComponent(windowSize = windowSize,innerPadding = innerPadding,navController = navController)
+            }
         }
     }
 

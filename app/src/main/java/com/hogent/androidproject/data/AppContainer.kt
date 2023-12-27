@@ -22,7 +22,7 @@ class DefaultAppContainer(private val context: Context): AppContainer {
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
         .baseUrl(BASE_URL)
         .build()
-    val retrofitService: GameApiService by lazy {
+    private val retrofitService: GameApiService by lazy {
         retrofit.create(GameApiService::class.java)
     }
 

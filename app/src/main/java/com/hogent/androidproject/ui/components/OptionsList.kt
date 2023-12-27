@@ -19,7 +19,9 @@ import com.hogent.androidproject.navigation.NavigationType
  * Reusable radio button list used for platform choice and category choice
  */
 @Composable
-fun OptionsList(windowSize: NavigationType, options: List<String>, selectedOption: String, modifier: Modifier = Modifier, onOptionChange: (String) -> Unit) {
+fun OptionsList(windowSize: NavigationType, options: List<String>,
+                selectedOption: String, modifier: Modifier = Modifier,
+                onOptionChange: (String) -> Unit) {
     when (windowSize) {
         NavigationType.COMPACT_NAVIGATION ->
             LazyColumn(modifier = modifier) {

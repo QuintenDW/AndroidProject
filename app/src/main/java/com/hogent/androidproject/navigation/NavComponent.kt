@@ -32,8 +32,7 @@ fun NavComponent(windowSize: NavigationType,innerPadding: PaddingValues, navCont
     val gameUIState by gameViewModel.gameUiState.collectAsState()
     val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
     val platformOptions = listOf(
-        stringResource(R.string.pc), stringResource(R.string.browser),
-        stringResource(R.string.all)
+        stringResource(R.string.pc), stringResource(R.string.browser)
     )
     val categoryOptions = listOf(
         stringResource(R.string.mmorpg),

@@ -18,12 +18,10 @@ import androidx.navigation.compose.composable
 import com.hogent.androidproject.ui.components.NoFavorites
 import com.hogent.androidproject.ui.favorites.FavoriteViewModel
 import com.hogent.androidproject.ui.favorites.FavoritesScreen
-import com.hogent.androidproject.ui.home.GameViewModel
 import com.hogent.androidproject.ui.home.GamesScreen
 
 @Composable
 fun NavComponent(windowSize: NavigationType,innerPadding: PaddingValues, navController: NavHostController,
-                 gameViewModel: GameViewModel = viewModel(factory = GameViewModel.Factory),
                  favoriteViewModel: FavoriteViewModel = viewModel()) {
     val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
 
@@ -34,13 +32,20 @@ fun NavComponent(windowSize: NavigationType,innerPadding: PaddingValues, navCont
         exitTransition = { exitScreen() }
     ) {
         composable(route = NavigationRoutes.Start.name) {
-            GamesScreen(windowSize = windowSize)
+            GamesScreen(windowSize = windowSize,
+                addToFavorites = { favoriteViewModel.favoriteGame(it)},
+                isFavorite = { favoriteUIState.favoriteGamesList.contains(it)})
         }
         composable(route = NavigationRoutes.Favorites.name) {
+            favoriteUIState.favoriteGamesList
             if (favoriteUIState.favoriteGamesList.isEmpty()) {
                 NoFavorites()
             } else {
-                FavoritesScreen(favoriteViewModel = favoriteViewModel)
+                FavoritesScreen(favorites = favoriteUIState.favoriteGamesList,
+                    goBack = {navController.navigate(NavigationRoutes.Start.name)},
+                    addToFavorites = { favoriteViewModel.favoriteGame(it)},
+                    isFavorite = { favoriteUIState.favoriteGamesList.contains(it)}
+                    )
             }
 
         }

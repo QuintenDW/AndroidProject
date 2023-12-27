@@ -7,13 +7,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hogent.androidproject.R
+import com.hogent.androidproject.model.Game
 import com.hogent.androidproject.navigation.NavigationType
-import com.hogent.androidproject.ui.favorites.FavoriteViewModel
 
 @Composable
 fun GamesScreen(windowSize: NavigationType,
                 gameViewModel: GameViewModel = viewModel(factory = GameViewModel.Factory)
-                ,favoriteViewModel: FavoriteViewModel = viewModel()) {
+                ,
+                addToFavorites: (Game) -> Unit,
+                isFavorite: (Game) -> Boolean) {
     BackHandler(
         onBack = { gameViewModel.back() },
     )
@@ -53,8 +55,9 @@ fun GamesScreen(windowSize: NavigationType,
 
         WizardSteps.LIST -> {
             GameListScreen(gameViewModel = gameViewModel,
-                favoriteViewModel = favoriteViewModel,
-                onButtonClicked = { gameViewModel.back()})
+                onButtonClicked = { gameViewModel.back()},
+                addToFavorites = addToFavorites,
+                isFavorite = isFavorite)
         }
     }
 }

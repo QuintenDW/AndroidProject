@@ -6,6 +6,7 @@ import com.hogent.androidproject.model.Game
  * Contains state for the different options you can select
  */
 data class GameUiState(
+    val wizardStep: WizardSteps = WizardSteps.PLATFORM,
     val platform: String = "PC",
     val category: String = "shooter",
 

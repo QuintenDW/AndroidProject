@@ -4,9 +4,7 @@
     <string name="platform_selection">Selecteer hieronder op welk platform je speelt</string>
     <string name="volgende">Volgende</string>
     <string name="annuleer">Annuleer</string>
-    <string name="start">Start</string>
-    <string name="categorie">Categorie</string>
-    <string name="overzicht">Overzicht</string>
+    <string name="start">Games lijst</string>
     <string name="favorieten">Favorieten</string>
     <string name="terug_knop">terug knop</string>
     <string name="category_selection">Selecteer de game categorie</string>

@@ -65,6 +65,40 @@ class GameViewModel(private val gameRepository: GameRepository) : ViewModel() {
         }
 
     /**
+     * Function to go to next wizard step
+     */
+    fun next() {
+        when (_gameUiState.value.wizardStep) {
+            WizardSteps.PLATFORM -> {
+                _gameUiState.update { it.copy(wizardStep = WizardSteps.CATEGORY) }
+            }
+            WizardSteps.CATEGORY -> {
+                _gameUiState.update { it.copy(wizardStep = WizardSteps.LIST) }
+            }
+            WizardSteps.LIST -> {
+                throw IllegalStateException("Geen volgende");
+            }
+        }
+    }
+
+    /**
+     * Function to go to back wizard step
+     */
+    fun back() {
+        when (_gameUiState.value.wizardStep) {
+            WizardSteps.PLATFORM -> {
+                throw IllegalStateException("Geen vroige");
+            }
+            WizardSteps.CATEGORY -> {
+                _gameUiState.update { it.copy(wizardStep = WizardSteps.PLATFORM) }
+            }
+            WizardSteps.LIST -> {
+                _gameUiState.update { it.copy(wizardStep = WizardSteps.CATEGORY) }
+            }
+        }
+    }
+
+    /**
      * Factory to use repository, tells how to handle the parameter of viewmodel
      */
     companion object {

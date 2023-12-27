@@ -11,35 +11,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.hogent.androidproject.R
 import com.hogent.androidproject.ui.components.NoFavorites
 import com.hogent.androidproject.ui.favorites.FavoriteViewModel
 import com.hogent.androidproject.ui.favorites.FavoritesScreen
-import com.hogent.androidproject.ui.home.CategoryScreen
-import com.hogent.androidproject.ui.home.GameListScreen
-import com.hogent.androidproject.ui.home.GameViewModel
-import com.hogent.androidproject.ui.home.StartScreen
+import com.hogent.androidproject.ui.home.GamesScreen
 
 @Composable
 fun NavComponent(windowSize: NavigationType,innerPadding: PaddingValues, navController: NavHostController,
-                 gameViewModel: GameViewModel = viewModel(factory = GameViewModel.Factory),
                  favoriteViewModel: FavoriteViewModel = viewModel()) {
-    val gameUIState by gameViewModel.gameUiState.collectAsState()
     val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
-    val platformOptions = listOf(
-        stringResource(R.string.pc), stringResource(R.string.browser)
-    )
-    val categoryOptions = listOf(
-        stringResource(R.string.mmorpg),
-        stringResource(R.string.shooter),
-        stringResource(R.string.strategy), stringResource(R.string.moba),
-        stringResource(R.string.racing), stringResource(R.string.sports)
-    )
+
     NavHost(navController = navController,
         startDestination = NavigationRoutes.Start.name,
         modifier = androidx.compose.ui.Modifier.padding(innerPadding),
@@ -47,35 +32,20 @@ fun NavComponent(windowSize: NavigationType,innerPadding: PaddingValues, navCont
         exitTransition = { exitScreen() }
     ) {
         composable(route = NavigationRoutes.Start.name) {
-            StartScreen(
-                platformOptions = platformOptions,
-                onOptionChange = {  gameViewModel.setPlatform(it) },
-                onButtonClicked = {
-                    navController.navigate(NavigationRoutes.Category.name)
-                },
-                windowSize = windowSize
-            )
-        }
-        composable(route = NavigationRoutes.Category.name) {
-            CategoryScreen(
-                windowSize = windowSize,
-                categoryOptions = categoryOptions,
-                onOptionChange = { gameViewModel.setCategory(it) },
-                onButtonClicked = {
-                    gameViewModel.createGameList()
-                    navController.navigate(NavigationRoutes.List.name)
-                },
-                onCancelClicked = { navController.popBackStack(NavigationRoutes.Start.name,inclusive = false)}
-            )
-        }
-        composable(route = NavigationRoutes.List.name) {
-            GameListScreen(gameViewModel = gameViewModel, favoriteViewModel = favoriteViewModel)
+            GamesScreen(windowSize = windowSize,
+                addToFavorites = { favoriteViewModel.favoriteGame(it)},
+                isFavorite = { favoriteUIState.favoriteGamesList.contains(it)})
         }
         composable(route = NavigationRoutes.Favorites.name) {
+            favoriteUIState.favoriteGamesList
             if (favoriteUIState.favoriteGamesList.isEmpty()) {
                 NoFavorites()
             } else {
-                FavoritesScreen(favoriteViewModel = favoriteViewModel)
+                FavoritesScreen(favorites = favoriteUIState.favoriteGamesList,
+                    goBack = {navController.navigate(NavigationRoutes.Start.name)},
+                    addToFavorites = { favoriteViewModel.favoriteGame(it)},
+                    isFavorite = { favoriteUIState.favoriteGamesList.contains(it)}
+                    )
             }
 
         }

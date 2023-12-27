@@ -1,13 +1,13 @@
 package com.hogent.androidproject.ui.favorites
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
+import com.hogent.androidproject.model.Game
 import com.hogent.androidproject.ui.components.GameList
 
 @Composable
-fun FavoritesScreen( favoriteViewModel: FavoriteViewModel, modifier: Modifier = Modifier,) {
-    val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
-    GameList(gameList = favoriteUIState.favoriteGamesList, favoriteViewModel = favoriteViewModel)
+fun FavoritesScreen(favorites: List<Game>, goBack: () -> Unit,
+                    addToFavorites: (Game) -> Unit,
+                    isFavorite: (Game) -> Boolean) {
+    GameList(gameList = favorites, onButtonClicked = goBack, addToFavorites = addToFavorites,
+        isFavorite = isFavorite)
 }

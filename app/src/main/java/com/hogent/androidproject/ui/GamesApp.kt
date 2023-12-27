@@ -16,7 +16,6 @@ import com.hogent.androidproject.navigation.NavigationRoutes
 import com.hogent.androidproject.navigation.NavigationType
 import com.hogent.androidproject.ui.components.BottomAppBarComponent
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GamesApp(windowSize: NavigationType,  navController: NavHostController = rememberNavController()) {
     val backStackEntry by navController.currentBackStackEntryAsState()

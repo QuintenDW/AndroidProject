@@ -21,7 +21,7 @@ fun GamesNavigationRail(currentScreen: NavDestination?,
                         goToFavorites: () -> Unit = {},
                         modifier: Modifier = Modifier) {
     NavigationRail(modifier = modifier,containerColor = MaterialTheme.colorScheme.tertiary,
-        contentColor = MaterialTheme.colorScheme.primary,) {
+        contentColor = MaterialTheme.colorScheme.primary) {
         Spacer(modifier = Modifier.height(16.dp))
         NavigationRailItem(selected = currentScreen?.route == NavigationRoutes.Start.name,
             onClick = goToStart,
@@ -37,7 +37,7 @@ fun GamesNavigationRail(currentScreen: NavDestination?,
             icon = { Icon(
                 imageVector = Icons.Outlined.FavoriteBorder,
                 tint = if (currentScreen?.route == NavigationRoutes.Favorites.name) Color.Black else Color.White,
-                contentDescription = "Ga naar info pagina")
+                contentDescription = "Ga naar favorieten pagina")
             }
         )
     }

@@ -10,6 +10,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.hogent.androidproject.navigation.CustomTopAppBar
 import com.hogent.androidproject.navigation.GamesNavigationRail
+import com.hogent.androidproject.navigation.GamesPermanentNavigationDrawer
 import com.hogent.androidproject.navigation.NavComponent
 import com.hogent.androidproject.navigation.NavigationRoutes
 import com.hogent.androidproject.navigation.NavigationType
@@ -42,6 +43,20 @@ fun GamesApp(windowSize: NavigationType,  navController: NavHostController = rem
         Row {
             GamesNavigationRail(currentScreen = backStackEntry?.destination, goToStart = { navController.navigate(NavigationRoutes.Start.name) },
                 goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) })
+            Scaffold(
+                topBar = {
+                    CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,
+                        currentScreen = currentScreen,
+                        navigateUp = { navController.navigateUp() }
+                    )
+                }
+            ) { innerPadding ->
+                NavComponent(windowSize = windowSize,innerPadding = innerPadding,navController = navController)
+            }
+        }
+    } else {
+        GamesPermanentNavigationDrawer(currentScreen = backStackEntry?.destination, goToStart = { navController.navigate(NavigationRoutes.Start.name) },
+            goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) }) {
             Scaffold(
                 topBar = {
                     CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,

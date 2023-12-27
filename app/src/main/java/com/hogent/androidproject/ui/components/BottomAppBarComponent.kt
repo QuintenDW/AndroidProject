@@ -30,7 +30,7 @@ fun BottomAppBarComponent(currentScreen: NavigationRoutes, modifier: Modifier = 
             icon = { Icon(
                 imageVector = Icons.Outlined.FavoriteBorder,
                 tint = if (currentScreen == NavigationRoutes.Favorites) Color.Black else Color.White,
-                contentDescription = "Ga naar info pagina")
+                contentDescription = "Ga naar favorieten pagina")
             }
         )
     }

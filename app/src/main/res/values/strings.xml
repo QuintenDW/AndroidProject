@@ -22,4 +22,6 @@
     <string name="racing">racing</string>
     <string name="sports">sports</string>
     <string name="game_lijst">game List</string>
+    <string name="favoriete_knop">Favoriete knop</string>
+    <string name="geen_favorieten">"Je hebt geen favorieten"</string>
 </resources>

@@ -26,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -104,8 +105,13 @@ private fun GameItemButton(expanded: Boolean, modifier: Modifier = Modifier,onCl
 
 @Composable
 private fun FavoriteButton(isFavorite: Boolean, modifier: Modifier = Modifier, onClick: () -> Unit) {
-    IconButton(onClick = onClick,modifier = modifier) {
-        Icon(imageVector = if(isFavorite)  Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder, contentDescription = "Favoriet knop")
+    IconButton(onClick = onClick,modifier = modifier.testTag(stringResource(
+        R.string.favoriete_knop
+    ))) {
+        Icon(imageVector = if(isFavorite)  Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+            contentDescription = stringResource(
+            R.string.favoriete_knop
+        ))
     }
 }
 

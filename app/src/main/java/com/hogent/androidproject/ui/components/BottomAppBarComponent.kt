@@ -10,6 +10,8 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.hogent.androidproject.R
 import com.hogent.androidproject.navigation.NavigationRoutes
 
 @Composable
@@ -22,7 +24,7 @@ fun BottomAppBarComponent(currentScreen: NavigationRoutes, modifier: Modifier = 
             icon = { Icon(
                 imageVector = Icons.Outlined.Home,
                 tint = if (currentScreen == NavigationRoutes.Start) Color.Black else Color.White,
-                contentDescription = "Ga naar home pagina")
+                contentDescription = stringResource(id = R.string.home_pagina))
             }
         )
         NavigationBarItem(selected = currentScreen == NavigationRoutes.Favorites,
@@ -30,7 +32,8 @@ fun BottomAppBarComponent(currentScreen: NavigationRoutes, modifier: Modifier = 
             icon = { Icon(
                 imageVector = Icons.Outlined.FavoriteBorder,
                 tint = if (currentScreen == NavigationRoutes.Favorites) Color.Black else Color.White,
-                contentDescription = "Ga naar favorieten pagina")
+                contentDescription = stringResource(id = R.string.favorieten_pagina)
+            )
             }
         )
     }

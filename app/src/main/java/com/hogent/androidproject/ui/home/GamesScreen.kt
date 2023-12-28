@@ -36,6 +36,7 @@ fun GamesScreen(windowSize: NavigationType,
                 onButtonClicked = {
                     gameViewModel.next()
                 },
+                selectedOption=gameUIState.platform,
                 windowSize = windowSize
             )
         }
@@ -48,6 +49,7 @@ fun GamesScreen(windowSize: NavigationType,
                     gameViewModel.createGameList()
                     gameViewModel.next()
                 },
+                selectedOption= gameUIState.category,
                 onCancelClicked = { gameViewModel.back()}
             )
         }

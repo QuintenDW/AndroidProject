@@ -10,10 +10,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
@@ -32,13 +28,13 @@ import com.hogent.androidproject.ui.components.OptionsList
 fun StartScreen(
     platformOptions: List<String>,
     windowSize: NavigationType,
+    selectedOption: String,
     modifier: Modifier = Modifier,
     onOptionChange: (String) -> Unit = {},
     onButtonClicked: () -> Unit = {},
 
 ) {
 
-    var selectedOption by rememberSaveable { mutableStateOf("PC")}
 
     Column(
         modifier = modifier.fillMaxHeight(),
@@ -52,7 +48,6 @@ fun StartScreen(
                 options = platformOptions,
                 selectedOption = selectedOption,
                 onOptionChange = {
-                    selectedOption = it
                     onOptionChange(it)
                 }
             )

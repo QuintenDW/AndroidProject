@@ -19,9 +19,10 @@ import com.hogent.androidproject.R
 
 @Composable
 fun GamesNavigationRail(currentScreen: NavDestination?,
+                        modifier: Modifier = Modifier,
                         goToStart: () -> Unit = {},
                         goToFavorites: () -> Unit = {},
-                        modifier: Modifier = Modifier) {
+                        ) {
     NavigationRail(modifier = modifier,containerColor = MaterialTheme.colorScheme.tertiary,
         contentColor = MaterialTheme.colorScheme.primary) {
         Spacer(modifier = Modifier.height(16.dp))

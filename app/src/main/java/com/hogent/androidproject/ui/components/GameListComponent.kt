@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
@@ -41,7 +42,8 @@ fun GameList(
                 items(gameList) {
                     GameItem(game = it, modifier = Modifier.padding(
                         vertical=dimensionResource(id = R.dimen.padding_vertical),
-                        horizontal = dimensionResource(id = R.dimen.padding_medium)),
+                        horizontal = dimensionResource(id = R.dimen.padding_medium))
+                        .heightIn(min = 110.dp),
                         isAlreadyFavorite =
                     { isFavorite(it) }) {
                         addToFavorites(it)

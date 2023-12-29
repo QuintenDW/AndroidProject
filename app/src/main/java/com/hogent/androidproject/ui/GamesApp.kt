@@ -1,7 +1,6 @@
 package com.hogent.androidproject.ui
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,16 +31,17 @@ fun GamesApp(windowSize: NavigationType,  navController: NavHostController = rem
             bottomBar = {
                 BottomAppBarComponent(
                     currentScreen = currentScreen,
-                    goToStart = { navController.navigate(NavigationRoutes.Start.name) },
-                    goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) })
+                    goToStart = { navController.navigate(NavigationRoutes.Start.name) {launchSingleTop=true} },
+                    goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) {launchSingleTop=true}})
             },
         ) { innerPadding ->
             NavComponent(windowSize = windowSize,innerPadding = innerPadding,navController = navController)
         }
     } else if (windowSize == NavigationType.NAVIGATION_RAIL) {
         Row {
-            GamesNavigationRail(currentScreen = backStackEntry?.destination, goToStart = { navController.navigate(NavigationRoutes.Start.name) },
-                goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) })
+            GamesNavigationRail(currentScreen = backStackEntry?.destination,
+                goToStart = { navController.navigate(NavigationRoutes.Start.name) {launchSingleTop=true} },
+                goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) {launchSingleTop=true} })
             Scaffold(
                 topBar = {
                     CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,
@@ -54,8 +54,9 @@ fun GamesApp(windowSize: NavigationType,  navController: NavHostController = rem
             }
         }
     } else {
-        GamesPermanentNavigationDrawer(currentScreen = backStackEntry?.destination, goToStart = { navController.navigate(NavigationRoutes.Start.name) },
-            goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) }) {
+        GamesPermanentNavigationDrawer(currentScreen = backStackEntry?.destination,
+            goToStart = { navController.navigate(NavigationRoutes.Start.name) {launchSingleTop=true}},
+            goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) {launchSingleTop=true}}) {
             Scaffold(
                 topBar = {
                     CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,

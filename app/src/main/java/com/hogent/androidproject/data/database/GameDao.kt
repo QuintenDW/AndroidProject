@@ -26,4 +26,6 @@ interface GameDao {
     @Query("SELECT * from games where lower(platform) like '%' || :platform || '%' and lower(genre) like :genre ORDER BY title ASC")
     fun getAllGames(platform: String, genre: String): Flow<List<dbGame>>
 
+    @Query("SELECT * from games where isFavorite is 1")
+    fun getFavoriteGames(): Flow<List<dbGame>>
 }

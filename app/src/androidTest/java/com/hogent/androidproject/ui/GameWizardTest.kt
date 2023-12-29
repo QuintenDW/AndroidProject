@@ -25,7 +25,7 @@ class GameWizardTest {
     fun initialize() {
         composeTestRule.setContent {
             GamesScreen(windowSize = NavigationType.COMPACT_NAVIGATION,
-                gameViewModel = viewModel, addToFavorites = {}, isFavorite = {false})
+                gameViewModel = viewModel, addToFavorites = {})
         }
     }
     @Test

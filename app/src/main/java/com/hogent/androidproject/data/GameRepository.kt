@@ -1,8 +1,10 @@
 package com.hogent.androidproject.data
 
 import com.hogent.androidproject.data.database.GameDao
+import com.hogent.androidproject.data.database.asDbFavorite
 import com.hogent.androidproject.data.database.asDbGame
 import com.hogent.androidproject.data.database.asDomainGames
+import com.hogent.androidproject.model.Favorite
 import com.hogent.androidproject.model.Game
 import com.hogent.androidproject.network.GameApiService
 import com.hogent.androidproject.network.asDomainObjects
@@ -13,13 +15,13 @@ import kotlinx.coroutines.flow.onEach
 
 interface GameRepository {
     fun getGames(platform: String, category: String): Flow<List<Game>>
-    suspend fun insertGame(game: Game)
 
-    fun gameExists(title: String): Boolean
+    fun getFavorites(): Flow<List<Game>>
+    suspend fun insertGame(game: Game)
 
     suspend fun deleteGame(game: Game)
 
-    suspend fun updateGame(game: Game)
+    suspend fun updateFavorite(favorite: Favorite)
 
     suspend fun refresh(platform: String, category: String)
 
@@ -37,20 +39,29 @@ class CachingGameRepository(private val gameDao: GameDao,private val gameApiServ
         }
     }
 
+    /**
+     * Gets the users favorite games (can be empty if user has no favorites)
+     */
+    override fun getFavorites(): Flow<List<Game>> {
+        return gameDao.getFavoriteGames().map {
+            it.asDomainGames()
+        }
+    }
+
     override suspend fun insertGame(game: Game) {
         gameDao.insert(game.asDbGame())
     }
 
-    override fun gameExists (title: String): Boolean {
-        return gameDao.gameExists(title)
-    }
 
     override suspend fun deleteGame(game: Game) {
         gameDao.delete(game.asDbGame())
     }
 
-    override suspend fun updateGame(game: Game) {
-        gameDao.update(game.asDbGame())
+
+    //If the target entity is specified via entity then the parameters can be of arbitrary
+    // POJO types that will be interpreted as partial entities.
+    override suspend fun updateFavorite(favorite: Favorite) {
+        gameDao.update(favorite.asDbFavorite())
     }
 
     /**
@@ -60,10 +71,7 @@ class CachingGameRepository(private val gameDao: GameDao,private val gameApiServ
         gameApiService.getGamesAsFlow(platform,category).asDomainObjects().collect {
             value ->
             for(game in value) {
-                //if (!gameExists(game.title)) {
-                    insertGame(game);
-                //}
-
+                insertGame(game);
             }
         }
     }

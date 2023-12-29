@@ -9,13 +9,11 @@ import com.hogent.androidproject.ui.components.GameList
 fun GameListScreen(apiState: GameApiState,
                    gameList: List<Game>,
                    onButtonClicked: () -> Unit,
-                   addToFavorites: (Game) -> Unit,
-                   isFavorite: (Game) -> Boolean) {
+                   addToFavorites: (Game) -> Unit) {
 
     when(apiState) {
         is GameApiState.Success -> GameList(gameList = gameList,
-            onButtonClicked = onButtonClicked, addToFavorites = addToFavorites,
-            isFavorite = isFavorite)
+            onButtonClicked = onButtonClicked, addToFavorites = addToFavorites)
         is GameApiState.Loading -> Text("Laden...")
         is GameApiState.Error -> Text("Kan lijst niet laden")
     }

@@ -44,7 +44,7 @@ import com.hogent.androidproject.ui.theme.AndroidprojectTheme
 fun GameItem(
     game: Game,
     modifier: Modifier = Modifier,
-    isAlreadyFavorite: (Game) -> Boolean = {false},
+    isAlreadyFavorite: Boolean = false,
     onFavorite: (Game) -> Unit = {},
 
 ) {
@@ -58,7 +58,7 @@ fun GameItem(
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(R.dimen.padding_medium))) {
-            FavoriteButton(isFavorite = isAlreadyFavorite(game)) {
+            FavoriteButton(isFavorite = isAlreadyFavorite) {
                 onFavorite(game)
             }
             GameInfo(title = game.title, genre = game.genre, platforms = game.platform)
@@ -140,7 +140,8 @@ private fun GameItemPreview() {
                 "A hero-focused first-person team shooter from Blizzard Entertainment.",
                 "Shooter",
                 "PC (Windows)",
-                "Activision Blizzard"
+                "Activision Blizzard",
+                false
             )
         )
     }

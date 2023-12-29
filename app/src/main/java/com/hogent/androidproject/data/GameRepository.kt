@@ -3,6 +3,7 @@ package com.hogent.androidproject.data
 import com.hogent.androidproject.data.database.GameDao
 import com.hogent.androidproject.data.database.asDbGame
 import com.hogent.androidproject.data.database.asDomainGames
+import com.hogent.androidproject.model.Favorite
 import com.hogent.androidproject.model.Game
 import com.hogent.androidproject.network.GameApiService
 import com.hogent.androidproject.network.asDomainObjects
@@ -13,11 +14,13 @@ import kotlinx.coroutines.flow.onEach
 
 interface GameRepository {
     fun getGames(platform: String, category: String): Flow<List<Game>>
+
+    fun getFavorites(): Flow<List<Game>>
     suspend fun insertGame(game: Game)
 
     suspend fun deleteGame(game: Game)
 
-    suspend fun updateGame(game: Game)
+    suspend fun updateFavorite(favorite: Favorite)
 
     suspend fun refresh(platform: String, category: String)
 
@@ -35,17 +38,29 @@ class CachingGameRepository(private val gameDao: GameDao,private val gameApiServ
         }
     }
 
+    /**
+     * Gets the users favorite games (can be empty if user has no favorites)
+     */
+    override fun getFavorites(): Flow<List<Game>> {
+        return gameDao.getFavoriteGames().map {
+            it.asDomainGames()
+        }
+    }
+
     override suspend fun insertGame(game: Game) {
         gameDao.insert(game.asDbGame())
     }
-    
+
 
     override suspend fun deleteGame(game: Game) {
         gameDao.delete(game.asDbGame())
     }
 
-    override suspend fun updateGame(game: Game) {
-        gameDao.update(game.asDbGame())
+
+    //If the target entity is specified via entity then the parameters can be of arbitrary
+    // POJO types that will be interpreted as partial entities.
+    override suspend fun updateFavorite(favorite: Favorite) {
+        gameDao.update(favorite)
     }
 
     /**

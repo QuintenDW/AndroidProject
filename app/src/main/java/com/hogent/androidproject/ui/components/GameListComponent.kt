@@ -31,7 +31,6 @@ fun GameList(
     gameList: List<Game>,
     onButtonClicked: () -> Unit,
     addToFavorites: (Game) -> Unit,
-    isFavorite: (Game) -> Boolean,
     modifier: Modifier = Modifier,
 ) {
     Column {
@@ -45,7 +44,7 @@ fun GameList(
                         horizontal = dimensionResource(id = R.dimen.padding_medium))
                         .heightIn(min = 110.dp),
                         isAlreadyFavorite =
-                    { isFavorite(it) }) {
+                    it.isFavorite) {
                         addToFavorites(it)
                     }
                 }

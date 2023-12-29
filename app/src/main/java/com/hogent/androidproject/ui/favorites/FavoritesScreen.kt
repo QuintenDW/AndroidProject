@@ -6,8 +6,6 @@ import com.hogent.androidproject.ui.components.GameList
 
 @Composable
 fun FavoritesScreen(favorites: List<Game>, goBack: () -> Unit,
-                    addToFavorites: (Game) -> Unit,
-                    isFavorite: (Game) -> Boolean) {
-    GameList(gameList = favorites, onButtonClicked = goBack, addToFavorites = addToFavorites,
-        isFavorite = isFavorite)
+                    addToFavorites: (Game) -> Unit) {
+    GameList(gameList = favorites, onButtonClicked = goBack, addToFavorites = addToFavorites)
 }

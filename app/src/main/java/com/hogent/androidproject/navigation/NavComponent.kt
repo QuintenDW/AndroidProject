@@ -22,7 +22,7 @@ import com.hogent.androidproject.ui.home.GamesScreen
 
 @Composable
 fun NavComponent(windowSize: NavigationType,innerPadding: PaddingValues, navController: NavHostController,
-                 favoriteViewModel: FavoriteViewModel = viewModel()) {
+                 favoriteViewModel: FavoriteViewModel = viewModel(factory = FavoriteViewModel.Factory)) {
     val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
 
     NavHost(navController = navController,
@@ -33,8 +33,7 @@ fun NavComponent(windowSize: NavigationType,innerPadding: PaddingValues, navCont
     ) {
         composable(route = NavigationRoutes.Start.name) {
             GamesScreen(windowSize = windowSize,
-                addToFavorites = { favoriteViewModel.favoriteGame(it)},
-                isFavorite = { favoriteUIState.favoriteGamesList.contains(it)})
+                addToFavorites = { favoriteViewModel.favoriteGame(it)})
         }
         composable(route = NavigationRoutes.Favorites.name) {
             favoriteUIState.favoriteGamesList
@@ -43,8 +42,7 @@ fun NavComponent(windowSize: NavigationType,innerPadding: PaddingValues, navCont
             } else {
                 FavoritesScreen(favorites = favoriteUIState.favoriteGamesList,
                     goBack = {navController.navigate(NavigationRoutes.Start.name)},
-                    addToFavorites = { favoriteViewModel.favoriteGame(it)},
-                    isFavorite = { favoriteUIState.favoriteGamesList.contains(it)}
+                    addToFavorites = { favoriteViewModel.favoriteGame(it)}
                     )
             }
 

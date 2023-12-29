@@ -1,26 +1,58 @@
 package com.hogent.androidproject.ui.favorites
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.hogent.androidproject.GameApplication
+import com.hogent.androidproject.data.GameRepository
+import com.hogent.androidproject.model.Favorite
 import com.hogent.androidproject.model.Game
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
-class FavoriteViewModel : ViewModel() {
-    private val _favoriteUIState = MutableStateFlow(FavoriteUIState())
-    val favoriteUIState: StateFlow<FavoriteUIState> = _favoriteUIState.asStateFlow()
+class FavoriteViewModel(private val gameRepository: GameRepository) : ViewModel() {
 
+    lateinit var favoriteUIState : StateFlow<FavoriteUIState>
+
+
+    init {
+        getFavoriteGames()
+    }
+
+    /**
+     * Creates gamelist based on platform and category
+     */
+    private fun getFavoriteGames() {
+            favoriteUIState = gameRepository.getFavorites().map { FavoriteUIState(it) }
+                .stateIn(
+                    scope = viewModelScope,
+                    started = SharingStarted.WhileSubscribed(5_000L),
+                    initialValue = FavoriteUIState()
+                )
+    }
     fun favoriteGame(game: Game) {
-        _favoriteUIState.update {
-            if (hasGame(game)) {
-                it.copy(favoriteGamesList = it.favoriteGamesList - game)
-            } else {
-                it.copy(favoriteGamesList = it.favoriteGamesList + game)
+        viewModelScope.launch { saveFavorite(Favorite(game.id,!game.isFavorite)) }
+    }
+
+    private suspend fun saveFavorite(favorite: Favorite) {
+        gameRepository.updateFavorite(favorite)
+    }
+
+    /**
+     * Factory to use repository, tells how to handle the parameter of viewmodel
+     */
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as GameApplication)
+                val gameRepository = application.container.gameRepository
+                FavoriteViewModel(gameRepository = gameRepository)
             }
         }
-    }
-    private fun hasGame(game: Game): Boolean {
-        return _favoriteUIState.value.favoriteGamesList.contains(game)
     }
 }

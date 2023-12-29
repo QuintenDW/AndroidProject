@@ -13,8 +13,7 @@ import com.hogent.androidproject.navigation.NavigationType
 @Composable
 fun GamesScreen(windowSize: NavigationType,
                 gameViewModel: GameViewModel = viewModel(factory = GameViewModel.Factory),
-                addToFavorites: (Game) -> Unit,
-                isFavorite: (Game) -> Boolean) {
+                addToFavorites: (Game) -> Unit) {
     BackHandler(
         onBack = { gameViewModel.back() },
     )
@@ -60,8 +59,7 @@ fun GamesScreen(windowSize: NavigationType,
             GameListScreen(apiState = gameApiState,
                 gameList = listState.gameList,
                 onButtonClicked = { gameViewModel.back()},
-                addToFavorites = addToFavorites,
-                isFavorite = isFavorite)
+                addToFavorites = addToFavorites)
         }
     }
 }

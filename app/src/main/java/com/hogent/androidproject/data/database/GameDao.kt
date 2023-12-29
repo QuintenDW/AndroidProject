@@ -21,8 +21,6 @@ interface GameDao {
     suspend fun delete(game: dbGame)
 
 
-    @Query("SELECT EXISTS(SELECT * from games where lower(title) = :title)")
-    fun gameExists(title: String): Boolean
     @Query("SELECT * from games where lower(platform) like '%' || :platform || '%' and lower(genre) like :genre ORDER BY title ASC")
     fun getAllGames(platform: String, genre: String): Flow<List<dbGame>>
 

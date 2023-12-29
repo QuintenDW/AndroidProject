@@ -15,8 +15,6 @@ interface GameRepository {
     fun getGames(platform: String, category: String): Flow<List<Game>>
     suspend fun insertGame(game: Game)
 
-    fun gameExists(title: String): Boolean
-
     suspend fun deleteGame(game: Game)
 
     suspend fun updateGame(game: Game)
@@ -40,10 +38,7 @@ class CachingGameRepository(private val gameDao: GameDao,private val gameApiServ
     override suspend fun insertGame(game: Game) {
         gameDao.insert(game.asDbGame())
     }
-
-    override fun gameExists (title: String): Boolean {
-        return gameDao.gameExists(title)
-    }
+    
 
     override suspend fun deleteGame(game: Game) {
         gameDao.delete(game.asDbGame())
@@ -60,10 +55,7 @@ class CachingGameRepository(private val gameDao: GameDao,private val gameApiServ
         gameApiService.getGamesAsFlow(platform,category).asDomainObjects().collect {
             value ->
             for(game in value) {
-                //if (!gameExists(game.title)) {
-                    insertGame(game);
-                //}
-
+                insertGame(game);
             }
         }
     }

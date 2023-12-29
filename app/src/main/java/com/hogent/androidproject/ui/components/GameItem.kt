@@ -140,7 +140,8 @@ private fun GameItemPreview() {
                 "A hero-focused first-person team shooter from Blizzard Entertainment.",
                 "Shooter",
                 "PC (Windows)",
-                "Activision Blizzard"
+                "Activision Blizzard",
+                false
             )
         )
     }

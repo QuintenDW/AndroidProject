@@ -5,6 +5,7 @@ import com.hogent.androidproject.ui.home.GameApiState
 import com.hogent.androidproject.ui.home.GameViewModel
 import com.hogent.androidproject.ui.home.WizardSteps
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -40,6 +41,7 @@ class GameViewModelTest {
         assertEquals("mmorpg",viewModel.gameUiState.value.category)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `Can create games list`() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
@@ -88,10 +90,12 @@ class GameViewModelTest {
 }
 
 class  TestDispatcherRule(private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()) : TestWatcher() {
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun starting(description: Description) {
         Dispatchers.setMain(testDispatcher)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun finished(description: Description) {
         Dispatchers.resetMain()
     }

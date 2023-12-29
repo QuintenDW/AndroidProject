@@ -1,6 +1,8 @@
 package com.hogent.androidproject.fake
 
 import com.hogent.androidproject.network.ApiGame
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 object FakeDataSource {
     val games =  listOf<ApiGame>(
@@ -22,4 +24,8 @@ object FakeDataSource {
         profileURL = "https://www.freetogame.com/pubg"
     )
     )
+    var favorites = arrayListOf<ApiGame>()
+}
+fun FakeDataSource.getGamesAsFlow(): Flow<List<ApiGame>> = flow {
+    emit(favorites)
 }

@@ -25,7 +25,7 @@ class FavoriteViewModel(private val gameRepository: GameRepository) : ViewModel(
     }
 
     /**
-     * Creates gamelist based on platform and category
+     * Gets favorite games
      */
     private fun getFavoriteGames() {
             favoriteUIState = gameRepository.getFavorites().map { FavoriteUIState(it) }

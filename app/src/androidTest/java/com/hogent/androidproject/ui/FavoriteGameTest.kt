@@ -1,5 +1,6 @@
 package com.hogent.androidproject.ui
 
+import android.content.Context
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -21,16 +22,24 @@ import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.testing.TestNavHostController
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
 import com.hogent.androidproject.R
+import com.hogent.androidproject.data.database.GameDao
+import com.hogent.androidproject.data.database.GameDb
+import com.hogent.androidproject.data.database.asDbGame
 import com.hogent.androidproject.fake.FakeApiGameRepository
+import com.hogent.androidproject.fake.FakeDataSource
 import com.hogent.androidproject.navigation.NavigationRoutes
 import com.hogent.androidproject.navigation.enterScreen
 import com.hogent.androidproject.navigation.exitScreen
+import com.hogent.androidproject.network.asDomainObjects
 import com.hogent.androidproject.ui.components.NoFavorites
 import com.hogent.androidproject.ui.favorites.FavoriteViewModel
 import com.hogent.androidproject.ui.favorites.FavoritesScreen
 import com.hogent.androidproject.ui.home.GameListScreen
 import com.hogent.androidproject.ui.home.GameViewModel
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -39,16 +48,34 @@ class FavoriteGameTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private val gameViewModel = GameViewModel(gameRepository = FakeApiGameRepository())
-    private val favoriteViewModel = FavoriteViewModel(gameRepository = FakeApiGameRepository())
+    private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var navController: TestNavHostController
 
     @Before
     fun initialize() {
+        var gameDao: GameDao
+        var gameDb: GameDb
+        val context: Context = ApplicationProvider.getApplicationContext()
+        // Using an in-memory database because the information stored here disappears when the
+        // process is killed.
+        gameDb = Room.inMemoryDatabaseBuilder(context, GameDb::class.java)
+            // Allowing main thread queries, just for testing.
+            .allowMainThreadQueries()
+            .build()
+        gameDao = gameDb.gameDao()
         composeTestRule.setContent {
             navController = TestNavHostController(LocalContext.current).apply {
                 navigatorProvider.addNavigator(ComposeNavigator())
             }
+            favoriteViewModel = FavoriteViewModel(gameRepository =
+                com.hogent.androidproject.fake.FakeApiGameRepository(gameDao))
             gameViewModel.createGameList()
+            //Adding the 2 games to the fakedb so we can favorite them
+            runBlocking {
+                gameDao.insert(FakeDataSource.games.asDomainObjects().get(0).asDbGame())
+                gameDao.insert(FakeDataSource.games.asDomainObjects().get(1).asDbGame())
+            }
+
             val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
 
             NavHost(navController = navController,

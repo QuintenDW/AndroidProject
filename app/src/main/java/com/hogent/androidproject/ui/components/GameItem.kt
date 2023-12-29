@@ -97,7 +97,11 @@ private fun ExtraGameInfo(description: String,publisher: String, modifier: Modif
  * To see extra information from a game
  */
 @Composable
-private fun GameItemButton(expanded: Boolean, modifier: Modifier = Modifier,onClick: () -> Unit = {},) {
+private fun GameItemButton(
+    expanded: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
+) {
     IconButton(onClick = onClick, modifier = modifier) {
         Icon(imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore, contentDescription = "Toont extra info")
     }

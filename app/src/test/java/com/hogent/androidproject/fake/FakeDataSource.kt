@@ -3,7 +3,7 @@ package com.hogent.androidproject.fake
 import com.hogent.androidproject.network.ApiGame
 
 object FakeDataSource {
-    val games =  listOf<ApiGame>(
+    val games =  listOf(
     ApiGame(id = 540,title="Overwatch 2",thumbnail="https://www.freetogame.com/g/540/thumbnail.jpg", gameURL = "https://www.freetogame.com/open/overwatch-2",
         developer = "Activision Blizzard", releaseDate = "2022-10-04",
         description="A hero-focused first-person team shooter from Blizzard Entertainment.",

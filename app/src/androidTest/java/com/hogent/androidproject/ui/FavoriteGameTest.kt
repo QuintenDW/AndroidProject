@@ -53,8 +53,8 @@ class FavoriteGameTest {
 
     @Before
     fun initialize() {
-        var gameDao: GameDao
-        var gameDb: GameDb
+        val gameDao: GameDao
+        val gameDb: GameDb
         val context: Context = ApplicationProvider.getApplicationContext()
         // Using an in-memory database because the information stored here disappears when the
         // process is killed.
@@ -68,19 +68,20 @@ class FavoriteGameTest {
                 navigatorProvider.addNavigator(ComposeNavigator())
             }
             favoriteViewModel = FavoriteViewModel(gameRepository =
-                com.hogent.androidproject.fake.FakeApiGameRepository(gameDao))
+                FakeApiGameRepository(gameDao)
+            )
             gameViewModel.createGameList()
             //Adding the 2 games to the fakedb so we can favorite them
             runBlocking {
-                gameDao.insert(FakeDataSource.games.asDomainObjects().get(0).asDbGame())
-                gameDao.insert(FakeDataSource.games.asDomainObjects().get(1).asDbGame())
+                gameDao.insert(FakeDataSource.games.asDomainObjects()[0].asDbGame())
+                gameDao.insert(FakeDataSource.games.asDomainObjects()[1].asDbGame())
             }
 
             val favoriteUIState by favoriteViewModel.favoriteUIState.collectAsState()
 
             NavHost(navController = navController,
                 startDestination = NavigationRoutes.Start.name,
-                modifier = androidx.compose.ui.Modifier.padding(PaddingValues(6.dp)),
+                modifier = Modifier.padding(PaddingValues(6.dp)),
                 enterTransition = { enterScreen() },
                 exitTransition = { exitScreen() }
             ) {

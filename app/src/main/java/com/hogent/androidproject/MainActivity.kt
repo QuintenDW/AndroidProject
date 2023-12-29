@@ -19,7 +19,7 @@ import com.hogent.androidproject.ui.components.GreetingText
 import com.hogent.androidproject.ui.theme.AndroidprojectTheme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

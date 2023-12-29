@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 /**
  * Database class of games
  */
-@Database(entities = [dbGame::class], version= 3, exportSchema = false)
+@Database(entities = [DbGame::class], version= 3, exportSchema = false)
 abstract class GameDb : RoomDatabase() {
 
     abstract fun gameDao(): GameDao

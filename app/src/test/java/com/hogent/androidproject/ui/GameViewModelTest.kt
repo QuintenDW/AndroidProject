@@ -64,7 +64,7 @@ class GameViewModelTest {
     fun `Cannot go to next step when on list`() {
         viewModel.next()
         viewModel.next()
-        assertThrows(IllegalStateException::class.java, { viewModel.next()})
+        assertThrows(IllegalStateException::class.java) { viewModel.next() }
     }
     @Test
     fun `Can go back to platform selection when on category selection`() {
@@ -83,11 +83,11 @@ class GameViewModelTest {
     }
     @Test
     fun `Cannot go to back step when on platform`() {
-        assertThrows(IllegalStateException::class.java, { viewModel.back()})
+        assertThrows(IllegalStateException::class.java) { viewModel.back() }
     }
 }
 
-class  TestDispatcherRule(val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()) : TestWatcher() {
+class  TestDispatcherRule(private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()) : TestWatcher() {
     override fun starting(description: Description) {
         Dispatchers.setMain(testDispatcher)
     }

@@ -12,18 +12,18 @@ import kotlinx.coroutines.flow.Flow
 interface GameDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(game: dbGame)
+    suspend fun insert(game: DbGame)
 
-    @Update(entity = dbGame::class)
-    suspend fun update(favorite: dbFavorite)
+    @Update(entity = DbGame::class)
+    suspend fun update(favorite: DbFavorite)
 
     @Delete
-    suspend fun delete(game: dbGame)
+    suspend fun delete(game: DbGame)
 
 
     @Query("SELECT * from games where lower(platform) like '%' || :platform || '%' and lower(genre) like :genre ORDER BY title ASC")
-    fun getAllGames(platform: String, genre: String): Flow<List<dbGame>>
+    fun getAllGames(platform: String, genre: String): Flow<List<DbGame>>
 
     @Query("SELECT * from games where isFavorite is 1")
-    fun getFavoriteGames(): Flow<List<dbGame>>
+    fun getFavoriteGames(): Flow<List<DbGame>>
 }

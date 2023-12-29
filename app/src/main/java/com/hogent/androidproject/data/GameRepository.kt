@@ -71,7 +71,7 @@ class CachingGameRepository(private val gameDao: GameDao,private val gameApiServ
         gameApiService.getGamesAsFlow(platform,category).asDomainObjects().collect {
             value ->
             for(game in value) {
-                insertGame(game);
+                insertGame(game)
             }
         }
     }

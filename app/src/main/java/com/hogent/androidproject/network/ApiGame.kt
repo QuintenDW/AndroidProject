@@ -20,7 +20,7 @@ data class ApiGame(val id: Int,
                    val publisher: String)
 
 fun List<ApiGame>.asDomainObjects(): List<Game> {
-    var domainList = this.map {
+    val domainList = this.map {
         Game(it.id,it.title,it.description,it.genre,it.platform,it.publisher,false)
     }
     return domainList

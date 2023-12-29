@@ -38,13 +38,13 @@ fun GameList(
             .weight(1f)
             .testTag(stringResource(id = R.string.game_lijst))) {
             LazyColumn(modifier = modifier) {
-                items(gameList) {
-                    GameItem(game = it, modifier = Modifier.padding(
+                items(gameList) { game ->
+                    GameItem(game = game, modifier = Modifier.padding(
                         vertical=dimensionResource(id = R.dimen.padding_vertical),
                         horizontal = dimensionResource(id = R.dimen.padding_medium))
                         .heightIn(min = 110.dp),
                         isAlreadyFavorite =
-                    it.isFavorite) {
+                    game.isFavorite) {
                         addToFavorites(it)
                     }
                 }

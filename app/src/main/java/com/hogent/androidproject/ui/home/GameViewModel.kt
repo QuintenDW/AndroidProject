@@ -76,7 +76,7 @@ class GameViewModel(private val gameRepository: GameRepository) : ViewModel() {
                 _gameUiState.update { it.copy(wizardStep = WizardSteps.LIST) }
             }
             WizardSteps.LIST -> {
-                throw IllegalStateException("Geen volgende");
+                throw IllegalStateException("Geen volgende")
             }
         }
     }
@@ -87,7 +87,7 @@ class GameViewModel(private val gameRepository: GameRepository) : ViewModel() {
     fun back() {
         when (_gameUiState.value.wizardStep) {
             WizardSteps.PLATFORM -> {
-                throw IllegalStateException("Geen vroige");
+                throw IllegalStateException("Geen vroige")
             }
             WizardSteps.CATEGORY -> {
                 _gameUiState.update { it.copy(wizardStep = WizardSteps.PLATFORM) }

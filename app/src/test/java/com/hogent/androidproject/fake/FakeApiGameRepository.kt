@@ -25,7 +25,7 @@ class FakeApiGameRepository: GameRepository {
     }
 
     override suspend fun updateFavorite(favorite: Favorite) {
-        TODO("Not yet implemented")
+        //updates to favorite
     }
 
 

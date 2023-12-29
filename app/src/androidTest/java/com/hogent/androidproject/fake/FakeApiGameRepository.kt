@@ -6,14 +6,12 @@ import com.hogent.androidproject.data.database.asDbFavorite
 import com.hogent.androidproject.data.database.asDomainGames
 import com.hogent.androidproject.model.Favorite
 import com.hogent.androidproject.model.Game
-import com.hogent.androidproject.network.ApiGame
 import com.hogent.androidproject.network.asDomainObjects
 import com.hogent.androidproject.network.getGamesAsFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class FakeApiGameRepository(private val gameDao: GameDao? = null): GameRepository {
-    var favorites = listOf<ApiGame>()
     override fun getGames(platform: String, category: String): Flow<List<Game>> {
         return FakeGameApiService().getGamesAsFlow("","").asDomainObjects()
     }

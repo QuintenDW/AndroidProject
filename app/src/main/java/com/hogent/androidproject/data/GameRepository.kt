@@ -1,6 +1,7 @@
 package com.hogent.androidproject.data
 
 import com.hogent.androidproject.data.database.GameDao
+import com.hogent.androidproject.data.database.asDbFavorite
 import com.hogent.androidproject.data.database.asDbGame
 import com.hogent.androidproject.data.database.asDomainGames
 import com.hogent.androidproject.model.Favorite
@@ -60,7 +61,7 @@ class CachingGameRepository(private val gameDao: GameDao,private val gameApiServ
     //If the target entity is specified via entity then the parameters can be of arbitrary
     // POJO types that will be interpreted as partial entities.
     override suspend fun updateFavorite(favorite: Favorite) {
-        gameDao.update(favorite)
+        gameDao.update(favorite.asDbFavorite())
     }
 
     /**

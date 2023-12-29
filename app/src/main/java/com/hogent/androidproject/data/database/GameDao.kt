@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.hogent.androidproject.model.Favorite
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -16,7 +15,7 @@ interface GameDao {
     suspend fun insert(game: dbGame)
 
     @Update(entity = dbGame::class)
-    suspend fun update(favorite: Favorite)
+    suspend fun update(favorite: dbFavorite)
 
     @Delete
     suspend fun delete(game: dbGame)

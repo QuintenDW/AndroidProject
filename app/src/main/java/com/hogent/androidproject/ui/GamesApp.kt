@@ -19,53 +19,58 @@ import com.hogent.androidproject.ui.components.BottomAppBarComponent
 fun GamesApp(windowSize: NavigationType,  navController: NavHostController = rememberNavController()) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = NavigationRoutes.valueOf(backStackEntry?.destination?.route ?: NavigationRoutes.Start.name)
-
-    if (windowSize == NavigationType.COMPACT_NAVIGATION) {
-        Scaffold(
-            topBar = {
-                CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,
-                    currentScreen = currentScreen,
-                    navigateUp = { navController.navigateUp() }
-                )
-            },
-            bottomBar = {
-                BottomAppBarComponent(
-                    currentScreen = currentScreen,
-                    goToStart = { navController.navigate(NavigationRoutes.Start.name) {launchSingleTop=true} },
-                    goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) {launchSingleTop=true}})
-            },
-        ) { innerPadding ->
-            NavComponent(windowSize = windowSize,innerPadding = innerPadding,navController = navController)
-        }
-    } else if (windowSize == NavigationType.NAVIGATION_RAIL) {
-        Row {
-            GamesNavigationRail(currentScreen = backStackEntry?.destination,
-                goToStart = { navController.navigate(NavigationRoutes.Start.name) {launchSingleTop=true} },
-                goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) {launchSingleTop=true} })
+    val goToStart = { navController.navigate(NavigationRoutes.Start.name) {launchSingleTop=true} }
+    val goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) {launchSingleTop=true}}
+    when (windowSize) {
+        NavigationType.COMPACT_NAVIGATION -> {
             Scaffold(
                 topBar = {
                     CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,
                         currentScreen = currentScreen,
                         navigateUp = { navController.navigateUp() }
                     )
-                }
+                },
+                bottomBar = {
+                    BottomAppBarComponent(
+                        currentScreen = currentScreen,
+                        goToStart = goToStart,
+                        goToFavorites = goToFavorites)
+                },
             ) { innerPadding ->
                 NavComponent(windowSize = windowSize,innerPadding = innerPadding,navController = navController)
             }
         }
-    } else {
-        GamesPermanentNavigationDrawer(currentScreen = backStackEntry?.destination,
-            goToStart = { navController.navigate(NavigationRoutes.Start.name) {launchSingleTop=true}},
-            goToFavorites = { navController.navigate(NavigationRoutes.Favorites.name) {launchSingleTop=true}}) {
-            Scaffold(
-                topBar = {
-                    CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,
-                        currentScreen = currentScreen,
-                        navigateUp = { navController.navigateUp() }
-                    )
+        NavigationType.NAVIGATION_RAIL -> {
+            Row {
+                GamesNavigationRail(currentScreen = backStackEntry?.destination,
+                    goToStart = goToStart,
+                    goToFavorites = goToFavorites)
+                Scaffold(
+                    topBar = {
+                        CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,
+                            currentScreen = currentScreen,
+                            navigateUp = { navController.navigateUp() }
+                        )
+                    }
+                ) { innerPadding ->
+                    NavComponent(windowSize = windowSize,innerPadding = innerPadding,navController = navController)
                 }
-            ) { innerPadding ->
-                NavComponent(windowSize = windowSize,innerPadding = innerPadding,navController = navController)
+            }
+        }
+        else -> {
+            GamesPermanentNavigationDrawer(currentScreen = backStackEntry?.destination,
+                goToStart = goToStart,
+                goToFavorites = goToFavorites) {
+                Scaffold(
+                    topBar = {
+                        CustomTopAppBar(canNavigateBack = navController.previousBackStackEntry != null,
+                            currentScreen = currentScreen,
+                            navigateUp = { navController.navigateUp() }
+                        )
+                    }
+                ) { innerPadding ->
+                    NavComponent(windowSize = windowSize,innerPadding = innerPadding,navController = navController)
+                }
             }
         }
     }

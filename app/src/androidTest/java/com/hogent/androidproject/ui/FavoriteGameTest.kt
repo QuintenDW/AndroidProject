@@ -39,7 +39,7 @@ class FavoriteGameTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private val gameViewModel = GameViewModel(gameRepository = FakeApiGameRepository())
-    private val favoriteViewModel = FavoriteViewModel()
+    private val favoriteViewModel = FavoriteViewModel(gameRepository = FakeApiGameRepository())
     private lateinit var navController: TestNavHostController
 
     @Before
@@ -63,8 +63,7 @@ class FavoriteGameTest {
                     GameListScreen(apiState = gameApiState,
                         gameList = listState.gameList,
                         onButtonClicked = { gameViewModel.back()},
-                        addToFavorites = { favoriteViewModel.favoriteGame(it)},
-                        isFavorite = { favoriteUIState.favoriteGamesList.contains(it)})
+                        addToFavorites = { favoriteViewModel.favoriteGame(it)})
 
                     //Button added to avoid illegalStateException with testing
                     Button(modifier = Modifier.testTag("GoFavorites"),
@@ -80,8 +79,7 @@ class FavoriteGameTest {
                     } else {
                         FavoritesScreen(favorites = favoriteUIState.favoriteGamesList,
                             goBack = {navController.navigate(NavigationRoutes.Start.name)},
-                            addToFavorites = { favoriteViewModel.favoriteGame(it)},
-                            isFavorite = { favoriteUIState.favoriteGamesList.contains(it)}
+                            addToFavorites = { favoriteViewModel.favoriteGame(it)}
                         )
                     }
 

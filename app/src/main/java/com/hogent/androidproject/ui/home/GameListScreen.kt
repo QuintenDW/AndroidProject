@@ -5,6 +5,9 @@ import androidx.compose.runtime.Composable
 import com.hogent.androidproject.model.Game
 import com.hogent.androidproject.ui.components.GameList
 
+/**
+ * Show the list of games retrieved from Free-to-play games api
+ */
 @Composable
 fun GameListScreen(apiState: GameApiState,
                    gameList: List<Game>,

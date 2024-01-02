@@ -19,6 +19,9 @@ data class ApiGame(val id: Int,
                    val platform: String,
                    val publisher: String)
 
+/**
+ * Convert for api to domain and vice versa
+ */
 fun List<ApiGame>.asDomainObjects(): List<Game> {
     val domainList = this.map {
         Game(it.id,it.title,it.description,it.genre,it.platform,it.publisher,false)

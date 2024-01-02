@@ -27,9 +27,6 @@ class FakeApiGameRepository(private val gameDao: GameDao? = null): GameRepositor
     }
 
 
-    override suspend fun deleteGame(game: Game) {
-        //Deletes game
-    }
 
     override suspend fun updateFavorite(favorite: Favorite) {
         gameDao?.update(favorite.asDbFavorite())

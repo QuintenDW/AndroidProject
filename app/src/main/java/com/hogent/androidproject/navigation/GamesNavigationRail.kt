@@ -17,6 +17,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import com.hogent.androidproject.R
 
+/**
+ * Composable for navigation rail
+ */
 @Composable
 fun GamesNavigationRail(currentScreen: NavDestination?,
                         modifier: Modifier = Modifier,

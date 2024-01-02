@@ -1,7 +1,6 @@
 package com.hogent.androidproject.data.database
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -16,10 +15,6 @@ interface GameDao {
 
     @Update(entity = DbGame::class)
     suspend fun update(favorite: DbFavorite)
-
-    @Delete
-    suspend fun delete(game: DbGame)
-
 
     @Query("SELECT * from games where lower(platform) like '%' || :platform || '%' and lower(genre) like :genre ORDER BY title ASC")
     fun getAllGames(platform: String, genre: String): Flow<List<DbGame>>

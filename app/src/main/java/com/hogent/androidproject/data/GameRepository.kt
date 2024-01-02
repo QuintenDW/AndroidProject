@@ -19,8 +19,6 @@ interface GameRepository {
     fun getFavorites(): Flow<List<Game>>
     suspend fun insertGame(game: Game)
 
-    suspend fun deleteGame(game: Game)
-
     suspend fun updateFavorite(favorite: Favorite)
 
     suspend fun refresh(platform: String, category: String)
@@ -29,6 +27,9 @@ interface GameRepository {
 
 
 class CachingGameRepository(private val gameDao: GameDao,private val gameApiService: GameApiService): GameRepository {
+    /**
+     * Gets all games for a given platform and genre
+     */
     override fun getGames(platform: String, category: String): Flow<List<Game>> {
         return gameDao.getAllGames(platform,category).map {
             it.asDomainGames()
@@ -53,12 +54,7 @@ class CachingGameRepository(private val gameDao: GameDao,private val gameApiServ
     }
 
 
-    override suspend fun deleteGame(game: Game) {
-        gameDao.delete(game.asDbGame())
-    }
-
-
-    //If the target entity is specified via entity then the parameters can be of arbitrary
+    // If the target entity is specified via entity then the parameters can be of arbitrary
     // POJO types that will be interpreted as partial entities.
     override suspend fun updateFavorite(favorite: Favorite) {
         gameDao.update(favorite.asDbFavorite())

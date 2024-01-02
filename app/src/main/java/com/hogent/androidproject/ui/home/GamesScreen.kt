@@ -10,6 +10,9 @@ import com.hogent.androidproject.R
 import com.hogent.androidproject.model.Game
 import com.hogent.androidproject.navigation.NavigationType
 
+/**
+ * Wizard to select platform and category
+ */
 @Composable
 fun GamesScreen(windowSize: NavigationType,
                 gameViewModel: GameViewModel = viewModel(factory = GameViewModel.Factory),

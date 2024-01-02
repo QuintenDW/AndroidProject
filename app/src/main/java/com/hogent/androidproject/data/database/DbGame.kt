@@ -23,6 +23,10 @@ data class DbGame(
  * POJO types that will be interpreted as partial entities
  */
 data class DbFavorite(val id: Int, val isFavorite: Boolean)
+
+/**
+ * Converters from domain to db and vice versa
+ */
 fun DbGame.asDomainGame(): Game {
     return Game(this.id,this.title,this.description,this.genre,this.platform,this.publisher,this.isFavorite)
 }

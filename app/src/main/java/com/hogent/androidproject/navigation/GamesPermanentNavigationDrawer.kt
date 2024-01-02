@@ -22,6 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import com.hogent.androidproject.R
 
+/**
+ * Composable for navigation drawer
+ */
 @Composable
 fun GamesPermanentNavigationDrawer(currentScreen: NavDestination?,
                                    goToStart: () -> Unit = {},

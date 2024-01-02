@@ -19,10 +19,7 @@ class FakeApiGameRepository: GameRepository {
     override suspend fun insertGame(game: Game) {
         //inserts a game
     }
-
-    override suspend fun deleteGame(game: Game) {
-        //Deletes game
-    }
+    
 
     override suspend fun updateFavorite(favorite: Favorite) {
         //updates to favorite

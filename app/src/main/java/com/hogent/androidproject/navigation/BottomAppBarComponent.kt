@@ -1,4 +1,4 @@
-package com.hogent.androidproject.ui.components
+package com.hogent.androidproject.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -12,8 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.hogent.androidproject.R
-import com.hogent.androidproject.navigation.NavigationRoutes
 
+/**
+ * Bottom app bar for navigation
+ */
 @Composable
 fun BottomAppBarComponent(currentScreen: NavigationRoutes, modifier: Modifier = Modifier, goToStart: () -> Unit = {}, goToFavorites: () -> Unit = {}) {
     NavigationBar(containerColor = MaterialTheme.colorScheme.tertiary,

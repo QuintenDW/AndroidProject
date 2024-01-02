@@ -13,7 +13,7 @@ import com.hogent.androidproject.navigation.GamesPermanentNavigationDrawer
 import com.hogent.androidproject.navigation.NavComponent
 import com.hogent.androidproject.navigation.NavigationRoutes
 import com.hogent.androidproject.navigation.NavigationType
-import com.hogent.androidproject.ui.components.BottomAppBarComponent
+import com.hogent.androidproject.navigation.BottomAppBarComponent
 
 @Composable
 fun GamesApp(windowSize: NavigationType,  navController: NavHostController = rememberNavController()) {

@@ -35,10 +35,17 @@ class FavoriteViewModel(private val gameRepository: GameRepository) : ViewModel(
                     initialValue = FavoriteUIState()
                 )
     }
+
+    /**
+     * Add a game to favorites
+     */
     fun favoriteGame(game: Game) {
         viewModelScope.launch { saveFavorite(Favorite(game.id,!game.isFavorite)) }
     }
 
+    /**
+     * Save favorite to db
+     */
     private suspend fun saveFavorite(favorite: Favorite) {
         gameRepository.updateFavorite(favorite)
     }

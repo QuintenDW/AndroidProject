@@ -20,6 +20,9 @@ import com.hogent.androidproject.ui.favorites.FavoriteViewModel
 import com.hogent.androidproject.ui.favorites.FavoritesScreen
 import com.hogent.androidproject.ui.home.GamesScreen
 
+/**
+ * Contains routes in app
+ */
 @Composable
 fun NavComponent(windowSize: NavigationType,innerPadding: PaddingValues, navController: NavHostController,
                  favoriteViewModel: FavoriteViewModel = viewModel(factory = FavoriteViewModel.Factory)) {

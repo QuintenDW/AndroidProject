@@ -73,6 +73,9 @@ fun GameItem(
 
 }
 
+/**
+ * Shows extra information about game when expanded
+ */
 @Composable
 private fun ExtraGameInfo(description: String,publisher: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
@@ -94,7 +97,7 @@ private fun ExtraGameInfo(description: String,publisher: String, modifier: Modif
 }
 
 /**
- * To see extra information from a game
+ * To see expand the game
  */
 @Composable
 private fun GameItemButton(
@@ -107,6 +110,9 @@ private fun GameItemButton(
     }
 }
 
+/**
+ * Used to put a game in favorites
+ */
 @Composable
 private fun FavoriteButton(isFavorite: Boolean, modifier: Modifier = Modifier, onClick: () -> Unit) {
     IconButton(onClick = onClick,modifier = modifier.testTag(stringResource(

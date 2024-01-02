@@ -30,12 +30,18 @@ class GameViewModel(private val gameRepository: GameRepository) : ViewModel() {
     var gameApiState: GameApiState by mutableStateOf(GameApiState.Loading)
         private set
 
-
+    /**
+     * Sets the platform
+     */
     fun setPlatform(platform: String) {
         _gameUiState.update {
             it.copy(platform = platform)
         }
     }
+
+    /**
+     * Sets the category
+     */
     fun setCategory(category: String) {
         _gameUiState.update {
             it.copy(category = category)
